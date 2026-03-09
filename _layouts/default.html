@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title | default: site.title }}</title>
+
+    <meta name="description" content="{{ site.description }}">
+    <meta name="author" content="{{ site.author }}">
+    <meta property="og:title" content="{{ page.title | default: site.title }}">
+    <meta property="og:description" content="{{ site.description }}">
+    <meta property="og:type" content="website">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+
+    <style>
+        .gradient-text {
+            background: linear-gradient(90deg, #3b82f6, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            border-color: #3b82f6;
+            box-shadow: 0 10px 30px -10px rgba(59, 130, 246, 0.3);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-950 text-gray-200 font-sans leading-relaxed selection:bg-blue-500 selection:text-white">
+
+    <!-- NAVBAR -->
+    <nav class="fixed w-full bg-gray-950/80 backdrop-blur-lg border-b border-gray-800 z-50 transition-all">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-xl font-bold tracking-wider hover:text-blue-400 transition">DM.</a>
+            
+            <div class="hidden md:flex space-x-8 text-sm font-medium items-center">
+                <a href="#sobre" class="hover:text-blue-400 transition">Sobre</a>
+                <a href="#experiencia" class="hover:text-blue-400 transition">Setor Público</a>
+                <a href="#tecnico" class="hover:text-blue-400 transition">Infra & Automação</a>
+                <a href="#stack" class="hover:text-blue-400 transition">Stack</a>
+                
+                <!-- Language Toggle -->
+                <a href="/en" class="flex items-center gap-2 bg-gray-800 hover:bg-gray-700 px-3 py-1.5 rounded-full border border-gray-700 transition">
+                    <img src="https://flagcdn.com/w20/us.png" alt="English" class="w-4 h-3 rounded-sm"> EN
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- CONTEÚDO DA PÁGINA (INDEX) É INJETADO AQUI -->
+    <main>
+        {{ content }}
+    </main>
+
+    <!-- GISCUS (Comentários) -->
+    <section id="comentarios" class="max-w-4xl mx-auto py-16 px-6 border-t border-gray-800">
+        <h2 class="text-3xl font-bold mb-8 text-center" data-aos="fade-up">Deixe seu <span class="text-blue-400">Comentário</span></h2>
+        <div data-aos="fade-up" data-aos-delay="100">
+            <!-- COLOQUE SEU SCRIPT DO GISCUS AQUI -->
+            <script src="https://giscus.app/client.js"
+                    data-repo="SEU-USUARIO/SEU-REPOSITORIO"
+                    data-repo-id="SEU_REPO_ID"
+                    data-category="Comments"
+                    data-category-id="SEU_CATEGORY_ID"
+                    data-mapping="pathname"
+                    data-strict="0"
+                    data-reactions-enabled="1"
+                    data-emit-metadata="0"
+                    data-input-position="bottom"
+                    data-theme="dark"
+                    data-lang="pt"
+                    crossorigin="anonymous"
+                    async>
+            </script>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-950 border-t border-gray-900 text-gray-500 text-center py-8 text-sm">
+        <p>© 2026 Diego Martins</p>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, once: true, offset: 100 });
+
+        window.addEventListener("scroll", function () {
+            const nav = document.querySelector("nav");
+            nav.classList.toggle("shadow-lg", window.scrollY > 50);
+            nav.classList.toggle("border-gray-700", window.scrollY > 50);
+        });
+    </script>
+</body>
+</html>
