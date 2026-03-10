@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="scroll-smooth">
+<html lang="{{ page.lang | default: 'pt-BR' }}" class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
@@ -8,10 +8,7 @@
 
     <meta name="description" content="{{ site.description }}">
     <meta name="author" content="{{ site.author }}">
-    <meta property="og:title" content="{{ page.title | default: site.title }}">
-    <meta property="og:description" content="{{ site.description }}">
-    <meta property="og:type" content="website">
-
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
@@ -21,10 +18,11 @@
             background: linear-gradient(90deg, #3b82f6, #06b6d4);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            /* Correção para a letra G não ser cortada */
+            padding-bottom: 0.15em; 
+            display: inline-block;
         }
-        .card-hover {
-            transition: all 0.3s ease;
-        }
+        .card-hover { transition: all 0.3s ease; }
         .card-hover:hover {
             transform: translateY(-5px);
             border-color: #3b82f6;
@@ -35,63 +33,47 @@
 
 <body class="bg-gray-950 text-gray-200 font-sans leading-relaxed selection:bg-blue-500 selection:text-white">
 
-    <!-- NAVBAR -->
+    <!-- NAVBAR (Lógica Multi-idioma) -->
     <nav class="fixed w-full bg-gray-950/80 backdrop-blur-lg border-b border-gray-800 z-50 transition-all">
         <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-xl font-bold tracking-wider hover:text-blue-400 transition">DM.</a>
+            <a href="{{ site.url }}/" class="text-xl font-bold tracking-wider hover:text-blue-400 transition">DM.</a>
             
             <div class="hidden md:flex space-x-8 text-sm font-medium items-center">
-                <a href="#sobre" class="hover:text-blue-400 transition">Sobre</a>
-                <a href="#experiencia" class="hover:text-blue-400 transition">Setor Público</a>
-                <a href="#tecnico" class="hover:text-blue-400 transition">Infra & Automação</a>
-                <a href="#stack" class="hover:text-blue-400 transition">Stack</a>
-                
-                <!-- Language Toggle -->
-                <a href="/en" class="flex items-center gap-2 bg-gray-800 hover:bg-gray-700 px-3 py-1.5 rounded-full border border-gray-700 transition">
-                    <img src="https://flagcdn.com/w20/us.png" alt="English" class="w-4 h-3 rounded-sm"> EN
-                </a>
+                {% if page.lang == 'en' %}
+                    <a href="/en.html#sobre" class="hover:text-blue-400 transition">About</a>
+                    <a href="/en.html#experiencia" class="hover:text-blue-400 transition">Public Sector</a>
+                    <a href="/en.html#stack" class="hover:text-blue-400 transition">Stack</a>
+                    <a href="/blog.html" class="hover:text-blue-400 transition text-blue-400">Blog</a>
+                    
+                    <a href="/" class="flex items-center gap-2 bg-gray-800 hover:bg-gray-700 px-3 py-1.5 rounded-full border border-gray-700 transition">
+                        <img src="https://flagcdn.com/w20/br.png" alt="Português" class="w-4 h-3 rounded-sm"> PT
+                    </a>
+                {% else %}
+                    <a href="/#sobre" class="hover:text-blue-400 transition">Sobre</a>
+                    <a href="/#experiencia" class="hover:text-blue-400 transition">Setor Público</a>
+                    <a href="/#stack" class="hover:text-blue-400 transition">Stack</a>
+                    <a href="/blog.html" class="hover:text-blue-400 transition text-blue-400">Blog</a>
+                    
+                    <a href="/en.html" class="flex items-center gap-2 bg-gray-800 hover:bg-gray-700 px-3 py-1.5 rounded-full border border-gray-700 transition">
+                        <img src="https://flagcdn.com/w20/us.png" alt="English" class="w-4 h-3 rounded-sm"> EN
+                    </a>
+                {% endif %}
             </div>
         </div>
     </nav>
 
-    <!-- CONTEÚDO DA PÁGINA (INDEX) É INJETADO AQUI -->
     <main>
         {{ content }}
     </main>
 
-    <!-- GISCUS (Comentários) -->
-    <section id="comentarios" class="max-w-4xl mx-auto py-16 px-6 border-t border-gray-800">
-        <h2 class="text-3xl font-bold mb-8 text-center" data-aos="fade-up">Deixe seu <span class="text-blue-400">Comentário</span></h2>
-        <div data-aos="fade-up" data-aos-delay="100">
-            <!-- COLOQUE SEU SCRIPT DO GISCUS AQUI -->
-            <script src="https://giscus.app/client.js"
-                    data-repo="diegogyn/diegogyn.github.io"
-                    data-repo-id="R_kgDOML7fgA"
-                    data-category="Comments"
-                    data-category-id="DIC_kwDOML7fgM4C4DB9"
-                    data-mapping="pathname"
-                    data-strict="0"
-                    data-reactions-enabled="1"
-                    data-emit-metadata="0"
-                    data-input-position="bottom"
-                    data-theme="dark"
-                    data-lang="pt"
-                    crossorigin="anonymous"
-                    async>
-            </script>
-        </div>
-    </section>
-
     <!-- FOOTER -->
-    <footer class="bg-gray-950 border-t border-gray-900 text-gray-500 text-center py-8 text-sm">
+    <footer class="bg-gray-950 border-t border-gray-900 text-gray-500 text-center py-8 text-sm mt-10">
         <p>© 2026 Diego Martins</p>
     </footer>
 
-    <!-- SCRIPTS -->
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     <script>
         AOS.init({ duration: 800, once: true, offset: 100 });
-
         window.addEventListener("scroll", function () {
             const nav = document.querySelector("nav");
             nav.classList.toggle("shadow-lg", window.scrollY > 50);
