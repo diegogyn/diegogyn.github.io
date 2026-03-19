@@ -1,63 +1,184 @@
----
-layout: default
----
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: 'pt-BR' }}" class="scroll-pt-24">
 
-<article class="max-w-3xl mx-auto px-6 py-24 md:py-32 min-h-screen">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>{{ page.title | default: site.title }}</title>
 
-    <!-- Cabeçalho do Post -->
-    <header class="mb-12" data-aos="fade-up">
-        <a href="/blog.html" class="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-blue-400 transition mb-8">
-            <i class="fas fa-arrow-left text-xs"></i> Voltar ao Blog
-        </a>
-        <h1 class="text-4xl md:text-5xl font-bold mb-6 text-white leading-tight">{{ page.title }}</h1>
-        <div class="w-16 h-1 bg-blue-400 mb-6 rounded"></div>
-        <p class="text-blue-400 font-medium flex items-center gap-2">
-            <i class="fas fa-calendar-alt"></i>
-            Publicado em {{ page.date | date: "%d/%m/%Y" }}
-        </p>
-    </header>
+    <meta name="description" content="{{ site.description }}">
+    <meta name="author" content="{{ site.author }}">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
 
-    <!-- Conteúdo do Post -->
-    <div class="post-content" data-aos="fade-up" data-aos-delay="100">
-        {{ content }}
-    </div>
+    <style>
+        /* Utilitários gerais */
+        .gradient-text {
+            background: linear-gradient(90deg, #3b82f6, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            padding-bottom: 0.15em;
+            display: inline-block;
+        }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            border-color: #3b82f6;
+            box-shadow: 0 10px 30px -10px rgba(59, 130, 246, 0.3);
+        }
 
-    <!-- Rodapé do post -->
-    <footer class="mt-16 pt-8 border-t border-gray-800 flex flex-col sm:flex-row justify-between items-center gap-4">
-        <a href="/blog.html" class="text-sm text-gray-500 hover:text-blue-400 transition flex items-center gap-2">
-            <i class="fas fa-arrow-left text-xs"></i> Ver todos os posts
-        </a>
-        <div class="flex items-center gap-3 text-sm text-gray-500">
-            <span>Compartilhar:</span>
-            <!--<a href="https://twitter.com/intent/tweet?text={{ page.title | uri_escape }}&url={{ page.url | absolute_url | uri_escape }}" target="_blank" class="hover:text-blue-400 transition" title="Twitter/X">
-                <i class="fab fa-x-twitter"></i>
-            </a>-->
-            <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ page.url | absolute_url | uri_escape }}" target="_blank" class="hover:text-blue-400 transition" title="LinkedIn">
-                <i class="fab fa-linkedin-in"></i>
-            </a>
+        /* Nav e Links */
+        .nav-link { transition: color 0.2s; }
+        .nav-link:hover { color: #60a5fa; }
+
+        /* Comportamento de rolagem suave via CSS (apenas se o navegador suportar bem) */
+        @media (prefers-reduced-motion: no-preference) {
+            html { scroll-behavior: smooth; }
+        }
+
+        /* ── POST CONTENT ───────────────────────────── */
+        .post-content { line-height: 1.85; color: #d1d5db; }
+        .post-content p { margin-top: 0; margin-bottom: 1.4rem; }
+        .post-content h1, .post-content h2, .post-content h3, .post-content h4 {
+            color: #ffffff; font-weight: 700; line-height: 1.3; margin-top: 2.5rem; margin-bottom: 1rem;
+        }
+        .post-content h1 { font-size: 2rem; }
+        .post-content h2 { font-size: 1.5rem; border-bottom: 1px solid #1f2937; padding-bottom: .4rem; }
+        .post-content h3 { font-size: 1.2rem; color: #93c5fd; }
+        .post-content h4 { font-size: 1rem; color: #93c5fd; }
+        .post-content strong { color: #ffffff; font-weight: 600; }
+        .post-content em { color: #e5e7eb; font-style: italic; }
+        .post-content a { color: #60a5fa; text-decoration: none; }
+        .post-content a:hover { text-decoration: underline; }
+        .post-content ul, .post-content ol { margin-bottom: 1.4rem; padding-left: 1.6rem; }
+        .post-content ul { list-style-type: disc; }
+        .post-content ol { list-style-type: decimal; }
+        .post-content li { margin-bottom: .4rem; color: #d1d5db; }
+        .post-content li::marker { color: #3b82f6; }
+        .post-content code { background: #111827; color: #60a5fa; padding: .15em .45em; border-radius: 4px; font-size: .875em; font-family: 'Courier New', monospace; }
+        .post-content pre { background: #0f172a; border: 1px solid #1e293b; border-radius: .75rem; padding: 1.25rem 1.5rem; overflow-x: auto; margin-bottom: 1.6rem; margin-top: .5rem; }
+        .post-content pre code { background: transparent; color: #93c5fd; padding: 0; font-size: .9em; border-radius: 0; }
+        .post-content blockquote { border-left: 3px solid #3b82f6; background: #111827; color: #9ca3af; padding: .75rem 1.25rem; border-radius: 0 .5rem .5rem 0; margin: 1.5rem 0; font-style: italic; }
+        .post-content hr { border: none; border-top: 1px solid #1f2937; margin: 2.5rem 0; }
+        .post-content table { width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; font-size: .9rem; }
+        .post-content th { background: #1f2937; color: #fff; font-weight: 600; padding: .6rem 1rem; text-align: left; border: 1px solid #374151; }
+        .post-content td { padding: .6rem 1rem; border: 1px solid #1f2937; color: #d1d5db; }
+        .post-content tr:nth-child(even) td { background: #0f172a; }
+    </style>
+</head>
+
+<body class="bg-gray-950 text-gray-200 font-sans leading-relaxed antialiased selection:bg-blue-500 selection:text-white flex flex-col min-h-screen">
+
+    <nav id="navbar" class="sticky top-0 z-[100] w-full bg-gray-950/95 border-b border-gray-800 transition-colors duration-300">
+        <div class="max-w-6xl mx-auto px-6 h-20 flex justify-between items-center relative">
+            
+            <a href="{{ site.url }}/" class="text-xl font-bold tracking-widest text-gray-200 hover:text-white transition">DM.</a>
+
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium">
+                {% if page.lang == 'en' %}
+                    <a href="/en.html#sobre" class="nav-link text-gray-300">About</a>
+                    <a href="/en.html#experiencia" class="nav-link text-gray-300">Public Sector</a>
+                    <a href="/en.html#stack" class="nav-link text-gray-300">Stack</a>
+                    <a href="/blog.html" class="nav-link text-blue-400">Blog</a>
+                    <a href="/" class="flex items-center gap-2 bg-gray-800 hover:bg-gray-700 border border-gray-700 px-3 py-1.5 rounded-full text-gray-300 transition"><img src="https://flagcdn.com/w20/br.png" alt="PT" class="w-4"> PT</a>
+                {% else %}
+                    <a href="/#sobre" class="nav-link text-gray-300">Sobre</a>
+                    <a href="/#experiencia" class="nav-link text-gray-300">Setor Público</a>
+                    <a href="/#stack" class="nav-link text-gray-300">Stack</a>
+                    <a href="/blog.html" class="nav-link text-blue-400">Blog</a>
+                    <a href="/en.html" class="flex items-center gap-2 bg-gray-800 hover:bg-gray-700 border border-gray-700 px-3 py-1.5 rounded-full text-gray-300 transition"><img src="https://flagcdn.com/w20/us.png" alt="EN" class="w-4"> EN</a>
+                {% endif %}
+            </div>
+
+            <button id="menu-toggle" aria-label="Menu" class="md:hidden flex flex-col justify-center items-center gap-1.5 w-10 h-10 p-2 bg-transparent border-none cursor-pointer">
+                <span class="hline block w-6 h-[2px] bg-gray-300 rounded-full transition-all duration-300"></span>
+                <span class="hline block w-6 h-[2px] bg-gray-300 rounded-full transition-all duration-300"></span>
+                <span class="hline block w-6 h-[2px] bg-gray-300 rounded-full transition-all duration-300"></span>
+            </button>
         </div>
+
+        <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-gray-900 border-b border-gray-800 shadow-xl">
+            <div class="flex flex-col gap-6 px-6 py-8 text-base font-medium">
+                {% if page.lang == 'en' %}
+                    <a href="/en.html#sobre" class="text-gray-300 hover:text-white mobile-link">About</a>
+                    <a href="/en.html#experiencia" class="text-gray-300 hover:text-white mobile-link">Public Sector</a>
+                    <a href="/en.html#stack" class="text-gray-300 hover:text-white mobile-link">Stack</a>
+                    <a href="/blog.html" class="text-blue-400 mobile-link">Blog</a>
+                    <a href="/" class="flex items-center gap-2 bg-gray-800 border border-gray-700 w-fit px-4 py-2 rounded-full text-gray-300 mt-2"><img src="https://flagcdn.com/w20/br.png" alt="PT" class="w-4"> PT</a>
+                {% else %}
+                    <a href="/#sobre" class="text-gray-300 hover:text-white mobile-link">Sobre</a>
+                    <a href="/#experiencia" class="text-gray-300 hover:text-white mobile-link">Setor Público</a>
+                    <a href="/#stack" class="text-gray-300 hover:text-white mobile-link">Stack</a>
+                    <a href="/blog.html" class="text-blue-400 mobile-link">Blog</a>
+                    <a href="/en.html" class="flex items-center gap-2 bg-gray-800 border border-gray-700 w-fit px-4 py-2 rounded-full text-gray-300 mt-2"><img src="https://flagcdn.com/w20/us.png" alt="EN" class="w-4"> EN</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow w-full">
+        {{ content }}
+    </main>
+
+    <footer class="bg-gray-950 border-t border-gray-900 text-gray-500 text-center py-8 text-sm mt-10">
+        <p>© 2026 Diego Martins</p>
     </footer>
 
-</article>
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        // Inicializa animações
+        AOS.init({ 
+            duration: 800, 
+            once: true, 
+            offset: 50, 
+            startEvent: "DOMContentLoaded" 
+        });
 
-<!-- Comentários Giscus -->
-<section id="comentarios" class="max-w-3xl mx-auto py-16 px-6 border-t border-gray-800">
-    <h2 class="text-2xl font-bold mb-8 text-center">💬 Deixe seu <span class="text-blue-400">Comentário</span></h2>
-    <div data-aos="fade-up" data-aos-delay="100">
-        <script src="https://giscus.app/client.js"
-                data-repo="diegogyn/diegogyn.github.io"
-                data-repo-id="R_kgDOML7fgA"
-                data-category="Comments"
-                data-category-id="DIC_kwDOML7fgM4C4DB9"
-                data-mapping="pathname"
-                data-strict="0"
-                data-reactions-enabled="1"
-                data-emit-metadata="0"
-                data-input-position="bottom"
-                data-theme="dark"
-                data-lang="pt"
-                crossorigin="anonymous"
-                async>
-        </script>
-    </div>
-</section>
+        const toggle = document.getElementById("menu-toggle");
+        const mobileMenu = document.getElementById("mobile-menu");
+        const lines = document.querySelectorAll(".hline");
+        const mobileLinks = document.querySelectorAll(".mobile-link");
+
+        function toggleMenu() {
+            const isHidden = mobileMenu.classList.contains("hidden");
+            
+            if (isHidden) {
+                // Abre o menu
+                mobileMenu.classList.remove("hidden");
+                mobileMenu.classList.add("flex");
+                lines[0].style.transform = "translateY(8px) rotate(45deg)";
+                lines[1].style.opacity = "0";
+                lines[2].style.transform = "translateY(-8px) rotate(-45deg)";
+            } else {
+                // Fecha o menu
+                mobileMenu.classList.add("hidden");
+                mobileMenu.classList.remove("flex");
+                lines[0].style.transform = "";
+                lines[1].style.opacity = "1";
+                lines[2].style.transform = "";
+            }
+        }
+
+        // Evento de clique no botão hambúrguer
+        toggle.addEventListener("click", toggleMenu);
+
+        // Fecha o menu ao clicar em um link (mobile)
+        mobileLinks.forEach(link => {
+            link.addEventListener("click", () => {
+                if (!mobileMenu.classList.contains("hidden")) {
+                    toggleMenu();
+                }
+            });
+        });
+
+        // Garantia de reset se a tela for rotacionada para o formato paisagem (tablet/desktop)
+        window.addEventListener("resize", () => {
+            if (window.innerWidth >= 768 && !mobileMenu.classList.contains("hidden")) {
+                toggleMenu();
+            }
+        });
+    </script>
+</body>
+</html>
