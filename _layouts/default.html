@@ -94,49 +94,47 @@
 
 <body class="bg-gray-950 text-gray-200 font-sans leading-relaxed selection:bg-blue-500 selection:text-white">
 
-    <nav id="navbar" style="position:fixed;top:0;left:0;width:100%;z-index:9999;background:rgba(3,7,18,0.88);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid #1f2937;transition:box-shadow .3s;isolation:isolate;">
-        <div style="max-width:72rem;margin:0 auto;padding:1rem 1.5rem;display:flex;justify-content:space-between;align-items:center;">
+<nav id="navbar" class="fixed top-0 left-0 w-full z-[9999] bg-gray-950/90 backdrop-blur-md border-b border-gray-800 transition-shadow duration-300 transform-gpu">
+        <div class="max-w-[72rem] mx-auto px-6 py-4 flex justify-between items-center">
 
-            <a href="{{ site.url }}/" class="nav-link" style="font-size:1.2rem;font-weight:700;letter-spacing:.1em;">DM.</a>
+            <a href="{{ site.url }}/" class="nav-link text-xl font-bold tracking-widest text-gray-200">DM.</a>
 
-            <div id="nav-desktop" class="hidden md:flex" style="gap:2rem;font-size:.875rem;font-weight:500;align-items:center;">
+            <div id="nav-desktop" class="hidden md:flex gap-8 text-sm font-medium items-center">
                 {% if page.lang == 'en' %}
                     <a href="/en.html#sobre"      class="nav-link">About</a>
                     <a href="/en.html#experiencia" class="nav-link">Public Sector</a>
                     <a href="/en.html#stack"       class="nav-link">Stack</a>
-                    <a href="/blog.html"           class="nav-link" style="color:#60a5fa;">Blog</a>
-                    <a href="/" class="nav-flag"><img src="https://flagcdn.com/w20/br.png" alt="PT"> PT</a>
+                    <a href="/blog.html"           class="nav-link text-blue-400">Blog</a>
+                    <a href="/" class="nav-flag"><img src="https://flagcdn.com/w20/br.png" alt="PT" class="w-5"> PT</a>
                 {% else %}
                     <a href="/#sobre"      class="nav-link">Sobre</a>
                     <a href="/#experiencia" class="nav-link">Setor Público</a>
                     <a href="/#stack"       class="nav-link">Stack</a>
-                    <a href="/blog.html"   class="nav-link" style="color:#60a5fa;">Blog</a>
-                    <a href="/en.html" class="nav-flag"><img src="https://flagcdn.com/w20/us.png" alt="EN"> EN</a>
+                    <a href="/blog.html"   class="nav-link text-blue-400">Blog</a>
+                    <a href="/en.html" class="nav-flag"><img src="https://flagcdn.com/w20/us.png" alt="EN" class="w-5"> EN</a>
                 {% endif %}
             </div>
 
-            <button id="menu-toggle" aria-label="Abrir menu" class="flex md:hidden"
-                style="flex-direction:column;justify-content:center;align-items:center;gap:5px;
-                       width:36px;height:36px;background:none;border:none;cursor:pointer;padding:4px;">
-                <span class="hline" style="display:block;width:22px;height:2px;background:#d1d5db;border-radius:2px;transition:transform .3s,opacity .3s;"></span>
-                <span class="hline" style="display:block;width:22px;height:2px;background:#d1d5db;border-radius:2px;transition:transform .3s,opacity .3s;"></span>
-                <span class="hline" style="display:block;width:22px;height:2px;background:#d1d5db;border-radius:2px;transition:transform .3s,opacity .3s;"></span>
+            <button id="menu-toggle" aria-label="Abrir menu" class="flex md:hidden flex-col justify-center items-center gap-[5px] w-9 h-9 bg-transparent border-none cursor-pointer p-1">
+                <span class="hline block w-[22px] h-[2px] bg-gray-300 rounded-sm transition-all duration-300"></span>
+                <span class="hline block w-[22px] h-[2px] bg-gray-300 rounded-sm transition-all duration-300"></span>
+                <span class="hline block w-[22px] h-[2px] bg-gray-300 rounded-sm transition-all duration-300"></span>
             </button>
         </div>
 
-        <div id="mobile-menu" class="md:!hidden" style="display:none;flex-direction:column;gap:1.1rem;padding:1rem 1.5rem 1.4rem;border-top:1px solid #1f2937;font-size:.95rem;font-weight:500;">
+        <div id="mobile-menu" class="md:!hidden hidden flex-col gap-4 px-6 pt-4 pb-6 border-t border-gray-800 text-[0.95rem] font-medium bg-gray-950/95 backdrop-blur-md">
             {% if page.lang == 'en' %}
                 <a href="/en.html#sobre"       class="nav-link">About</a>
                 <a href="/en.html#experiencia"  class="nav-link">Public Sector</a>
                 <a href="/en.html#stack"        class="nav-link">Stack</a>
-                <a href="/blog.html"            style="color:#60a5fa;text-decoration:none;">Blog</a>
-                <a href="/" class="nav-flag" style="align-self:flex-start;"><img src="https://flagcdn.com/w20/br.png" alt="PT"> PT</a>
+                <a href="/blog.html"            class="text-blue-400 no-underline">Blog</a>
+                <a href="/" class="nav-flag self-start"><img src="https://flagcdn.com/w20/br.png" alt="PT" class="w-5"> PT</a>
             {% else %}
                 <a href="/#sobre"       class="nav-link">Sobre</a>
                 <a href="/#experiencia"  class="nav-link">Setor Público</a>
                 <a href="/#stack"        class="nav-link">Stack</a>
-                <a href="/blog.html"     style="color:#60a5fa;text-decoration:none;">Blog</a>
-                <a href="/en.html" class="nav-flag" style="align-self:flex-start;"><img src="https://flagcdn.com/w20/us.png" alt="EN"> EN</a>
+                <a href="/blog.html"     class="text-blue-400 no-underline">Blog</a>
+                <a href="/en.html" class="nav-flag self-start"><img src="https://flagcdn.com/w20/us.png" alt="EN" class="w-5"> EN</a>
             {% endif %}
         </div>
     </nav>
