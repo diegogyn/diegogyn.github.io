@@ -18,8 +18,7 @@
             background: linear-gradient(90deg, #3b82f6, #06b6d4);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            /* Correção para a letra G não ser cortada */
-            padding-bottom: 0.15em; 
+            padding-bottom: 0.15em;
             display: inline-block;
         }
         .card-hover { transition: all 0.3s ease; }
@@ -28,6 +27,125 @@
             border-color: #3b82f6;
             box-shadow: 0 10px 30px -10px rgba(59, 130, 246, 0.3);
         }
+
+        /* =============================================
+           ESTILOS DO CONTEÚDO DOS POSTS (substitui prose)
+           ============================================= */
+        .post-content { line-height: 1.85; color: #d1d5db; }
+
+        /* Parágrafos */
+        .post-content p { margin-top: 0; margin-bottom: 1.4rem; }
+
+        /* Títulos */
+        .post-content h1,
+        .post-content h2,
+        .post-content h3,
+        .post-content h4 {
+            color: #ffffff;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .post-content h1 { font-size: 2rem; }
+        .post-content h2 {
+            font-size: 1.5rem;
+            border-bottom: 1px solid #1f2937;
+            padding-bottom: 0.4rem;
+        }
+        .post-content h3 { font-size: 1.2rem; color: #93c5fd; }
+        .post-content h4 { font-size: 1rem; color: #93c5fd; }
+
+        /* Negrito e itálico */
+        .post-content strong { color: #ffffff; font-weight: 600; }
+        .post-content em { color: #e5e7eb; font-style: italic; }
+
+        /* Links */
+        .post-content a { color: #60a5fa; text-decoration: none; }
+        .post-content a:hover { text-decoration: underline; }
+
+        /* Listas */
+        .post-content ul,
+        .post-content ol {
+            margin-bottom: 1.4rem;
+            padding-left: 1.6rem;
+        }
+        .post-content ul { list-style-type: disc; }
+        .post-content ol { list-style-type: decimal; }
+        .post-content li {
+            margin-bottom: 0.4rem;
+            color: #d1d5db;
+        }
+        .post-content li::marker { color: #3b82f6; }
+
+        /* Código inline */
+        .post-content code {
+            background: #111827;
+            color: #60a5fa;
+            padding: 0.15em 0.45em;
+            border-radius: 4px;
+            font-size: 0.875em;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        /* Bloco de código */
+        .post-content pre {
+            background: #0f172a;
+            border: 1px solid #1e293b;
+            border-radius: 0.75rem;
+            padding: 1.25rem 1.5rem;
+            overflow-x: auto;
+            margin-bottom: 1.6rem;
+            margin-top: 0.5rem;
+        }
+        .post-content pre code {
+            background: transparent;
+            color: #93c5fd;
+            padding: 0;
+            font-size: 0.9em;
+            border-radius: 0;
+        }
+
+        /* Blockquote */
+        .post-content blockquote {
+            border-left: 3px solid #3b82f6;
+            background: #111827;
+            color: #9ca3af;
+            padding: 0.75rem 1.25rem;
+            border-radius: 0 0.5rem 0.5rem 0;
+            margin: 1.5rem 0;
+            font-style: italic;
+        }
+        .post-content blockquote p { margin-bottom: 0; }
+
+        /* Linha horizontal --- */
+        .post-content hr {
+            border: none;
+            border-top: 1px solid #1f2937;
+            margin: 2.5rem 0;
+        }
+
+        /* Tabelas */
+        .post-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+        .post-content th {
+            background: #1f2937;
+            color: #ffffff;
+            font-weight: 600;
+            padding: 0.6rem 1rem;
+            text-align: left;
+            border: 1px solid #374151;
+        }
+        .post-content td {
+            padding: 0.6rem 1rem;
+            border: 1px solid #1f2937;
+            color: #d1d5db;
+        }
+        .post-content tr:nth-child(even) td { background: #0f172a; }
     </style>
 </head>
 
@@ -37,14 +155,14 @@
     <nav class="fixed w-full bg-gray-950/80 backdrop-blur-lg border-b border-gray-800 z-50 transition-all">
         <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
             <a href="{{ site.url }}/" class="text-xl font-bold tracking-wider hover:text-blue-400 transition">DM.</a>
-            
+
+            <!-- Menu Desktop -->
             <div class="hidden md:flex space-x-8 text-sm font-medium items-center">
                 {% if page.lang == 'en' %}
                     <a href="/en.html#sobre" class="hover:text-blue-400 transition">About</a>
                     <a href="/en.html#experiencia" class="hover:text-blue-400 transition">Public Sector</a>
                     <a href="/en.html#stack" class="hover:text-blue-400 transition">Stack</a>
                     <a href="/blog.html" class="hover:text-blue-400 transition text-blue-400">Blog</a>
-                    
                     <a href="/" class="flex items-center gap-2 bg-gray-800 hover:bg-gray-700 px-3 py-1.5 rounded-full border border-gray-700 transition">
                         <img src="https://flagcdn.com/w20/br.png" alt="Português" class="w-4 h-3 rounded-sm"> PT
                     </a>
@@ -53,12 +171,39 @@
                     <a href="/#experiencia" class="hover:text-blue-400 transition">Setor Público</a>
                     <a href="/#stack" class="hover:text-blue-400 transition">Stack</a>
                     <a href="/blog.html" class="hover:text-blue-400 transition text-blue-400">Blog</a>
-                    
                     <a href="/en.html" class="flex items-center gap-2 bg-gray-800 hover:bg-gray-700 px-3 py-1.5 rounded-full border border-gray-700 transition">
                         <img src="https://flagcdn.com/w20/us.png" alt="English" class="w-4 h-3 rounded-sm"> EN
                     </a>
                 {% endif %}
             </div>
+
+            <!-- Botão Hamburguer (mobile) -->
+            <button id="menu-toggle" class="md:hidden flex flex-col justify-center items-center w-8 h-8 gap-1.5 focus:outline-none" aria-label="Abrir menu">
+                <span class="hamburger-line block w-6 h-0.5 bg-gray-300 transition-all duration-300"></span>
+                <span class="hamburger-line block w-6 h-0.5 bg-gray-300 transition-all duration-300"></span>
+                <span class="hamburger-line block w-6 h-0.5 bg-gray-300 transition-all duration-300"></span>
+            </button>
+        </div>
+
+        <!-- Menu Mobile (dropdown) -->
+        <div id="mobile-menu" class="md:hidden hidden flex-col text-sm font-medium border-t border-gray-800 bg-gray-950 px-6 py-4 space-y-4">
+            {% if page.lang == 'en' %}
+                <a href="/en.html#sobre" class="hover:text-blue-400 transition block">About</a>
+                <a href="/en.html#experiencia" class="hover:text-blue-400 transition block">Public Sector</a>
+                <a href="/en.html#stack" class="hover:text-blue-400 transition block">Stack</a>
+                <a href="/blog.html" class="text-blue-400 block">Blog</a>
+                <a href="/" class="inline-flex items-center gap-2 bg-gray-800 hover:bg-gray-700 px-3 py-1.5 rounded-full border border-gray-700 transition">
+                    <img src="https://flagcdn.com/w20/br.png" alt="Português" class="w-4 h-3 rounded-sm"> PT
+                </a>
+            {% else %}
+                <a href="/#sobre" class="hover:text-blue-400 transition block">Sobre</a>
+                <a href="/#experiencia" class="hover:text-blue-400 transition block">Setor Público</a>
+                <a href="/#stack" class="hover:text-blue-400 transition block">Stack</a>
+                <a href="/blog.html" class="text-blue-400 block">Blog</a>
+                <a href="/en.html" class="inline-flex items-center gap-2 bg-gray-800 hover:bg-gray-700 px-3 py-1.5 rounded-full border border-gray-700 transition">
+                    <img src="https://flagcdn.com/w20/us.png" alt="English" class="w-4 h-3 rounded-sm"> EN
+                </a>
+            {% endif %}
         </div>
     </nav>
 
@@ -74,10 +219,41 @@
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     <script>
         AOS.init({ duration: 800, once: true, offset: 100 });
+
         window.addEventListener("scroll", function () {
             const nav = document.querySelector("nav");
             nav.classList.toggle("shadow-lg", window.scrollY > 50);
             nav.classList.toggle("border-gray-700", window.scrollY > 50);
+        });
+
+        // Menu hamburguer mobile
+        const toggle = document.getElementById("menu-toggle");
+        const mobileMenu = document.getElementById("mobile-menu");
+        const lines = document.querySelectorAll(".hamburger-line");
+
+        toggle.addEventListener("click", function () {
+            const isOpen = !mobileMenu.classList.contains("hidden");
+            if (isOpen) {
+                mobileMenu.classList.add("hidden");
+                lines[0].style.transform = "";
+                lines[1].style.opacity = "";
+                lines[2].style.transform = "";
+            } else {
+                mobileMenu.classList.remove("hidden");
+                lines[0].style.transform = "translateY(8px) rotate(45deg)";
+                lines[1].style.opacity = "0";
+                lines[2].style.transform = "translateY(-8px) rotate(-45deg)";
+            }
+        });
+
+        // Fechar menu ao clicar em um link
+        mobileMenu.querySelectorAll("a").forEach(link => {
+            link.addEventListener("click", () => {
+                mobileMenu.classList.add("hidden");
+                lines[0].style.transform = "";
+                lines[1].style.opacity = "";
+                lines[2].style.transform = "";
+            });
         });
     </script>
 </body>
