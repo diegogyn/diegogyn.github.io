@@ -1,9 +1,8 @@
 ---
-
 layout: post
 title: "Por que criei o Observatório ATI e como foi o processo"
 date: 2026-03-19 10:00:00 -0300
--------------------------------
+---
 
 A criação do Observatório da Carreira ATI surgiu de uma necessidade prática: **entender, com dados concretos, a realidade da carreira de Analista em Tecnologia da Informação no Executivo Federal**.
 

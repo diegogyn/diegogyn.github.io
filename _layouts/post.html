@@ -1,43 +1,77 @@
 ---
 layout: default
 ---
-<article class="max-w-4xl mx-auto px-6 py-24 md:py-28 text-gray-300 min-h-screen">
-    <h1 class="text-4xl md:text-5xl font-bold mb-4 text-white" data-aos="fade-up">{{ page.title }}</h1>
-    <div class="w-16 h-1 bg-blue-400 mb-8 rounded"></div>
-    <p class="text-blue-400 font-medium mb-10" data-aos="fade-up" data-aos-delay="100">Publicado em {{ page.date | date: "%d/%m/%Y" }}</p>
-    
-    <!-- O CONTEÚDO DO POST ENTRA AQUI -->
-<div class="prose prose-invert prose-lg max-w-none prose-blue 
-            prose-headings:text-white 
-            prose-p:text-gray-300 
-            prose-strong:text-white 
-            prose-code:text-blue-400
-            prose-pre:bg-gray-900
-            prose-blockquote:border-blue-400
-            prose-blockquote:text-gray-300">
+
+<article class="max-w-3xl mx-auto px-6 py-24 md:py-32 min-h-screen">
+
+    <!-- Cabeçalho do Post -->
+    <header class="mb-12" data-aos="fade-up">
+        <a href="/blog.html" class="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-blue-400 transition mb-8">
+            <i class="fas fa-arrow-left text-xs"></i> Voltar ao Blog
+        </a>
+        <h1 class="text-4xl md:text-5xl font-bold mb-6 text-white leading-tight">{{ page.title }}</h1>
+        <div class="w-16 h-1 bg-blue-400 mb-6 rounded"></div>
+        <p class="text-blue-400 font-medium flex items-center gap-2">
+            <i class="fas fa-calendar-alt"></i>
+            Publicado em {{ page.date | date: "%d/%m/%Y" }}
+        </p>
+    </header>
+
+    <!-- Conteúdo do Post -->
+    <div class="
+        prose prose-invert prose-lg max-w-none
+        prose-headings:text-white prose-headings:font-bold prose-headings:mt-10 prose-headings:mb-4
+        prose-h2:text-2xl prose-h2:border-b prose-h2:border-gray-800 prose-h2:pb-2
+        prose-h3:text-xl prose-h3:text-blue-300
+        prose-p:text-gray-300 prose-p:leading-relaxed
+        prose-strong:text-white
+        prose-a:text-blue-400 prose-a:no-underline hover:prose-a:underline
+        prose-code:text-blue-400 prose-code:bg-gray-900 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:text-sm
+        prose-pre:bg-gray-900 prose-pre:border prose-pre:border-gray-800 prose-pre:rounded-xl
+        prose-blockquote:border-blue-400 prose-blockquote:text-gray-300 prose-blockquote:bg-gray-900/50 prose-blockquote:py-1 prose-blockquote:rounded-r-lg
+        prose-ul:text-gray-300 prose-ol:text-gray-300
+        prose-li:marker:text-blue-400
+        prose-hr:border-gray-800
+    " data-aos="fade-up" data-aos-delay="100">
         {{ content }}
     </div>
+
+    <!-- Rodapé do post -->
+    <footer class="mt-16 pt-8 border-t border-gray-800 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <a href="/blog.html" class="text-sm text-gray-500 hover:text-blue-400 transition flex items-center gap-2">
+            <i class="fas fa-arrow-left text-xs"></i> Ver todos os posts
+        </a>
+        <div class="flex items-center gap-3 text-sm text-gray-500">
+            <span>Compartilhar:</span>
+            <a href="https://twitter.com/intent/tweet?text={{ page.title | uri_escape }}&url={{ page.url | absolute_url | uri_escape }}" target="_blank" class="hover:text-blue-400 transition" title="Twitter/X">
+                <i class="fab fa-x-twitter"></i>
+            </a>
+            <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ page.url | absolute_url | uri_escape }}" target="_blank" class="hover:text-blue-400 transition" title="LinkedIn">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+        </div>
+    </footer>
+
 </article>
 
-    <!-- GISCUS (Comentários) -->
-    <section id="comentarios" class="max-w-4xl mx-auto py-20 px-6 border-t border-gray-800">
-        <h2 class="text-3xl font-bold mb-8 text-center">💬 Deixe seu <span class="text-blue-400">Comentário</span></h2>
-        <div data-aos="fade-up" data-aos-delay="100">
-            <!-- COLOQUE SEU SCRIPT DO GISCUS AQUI -->
-            <script src="https://giscus.app/client.js"
-                    data-repo="diegogyn/diegogyn.github.io"
-                    data-repo-id="R_kgDOML7fgA"
-                    data-category="Comments"
-                    data-category-id="DIC_kwDOML7fgM4C4DB9"
-                    data-mapping="pathname"
-                    data-strict="0"
-                    data-reactions-enabled="1"
-                    data-emit-metadata="0"
-                    data-input-position="bottom"
-                    data-theme="dark"
-                    data-lang="pt"
-                    crossorigin="anonymous"
-                    async>
-            </script>
-        </div>
-    </section>
+<!-- Comentários Giscus -->
+<section id="comentarios" class="max-w-3xl mx-auto py-16 px-6 border-t border-gray-800">
+    <h2 class="text-2xl font-bold mb-8 text-center">💬 Deixe seu <span class="text-blue-400">Comentário</span></h2>
+    <div data-aos="fade-up" data-aos-delay="100">
+        <script src="https://giscus.app/client.js"
+                data-repo="diegogyn/diegogyn.github.io"
+                data-repo-id="R_kgDOML7fgA"
+                data-category="Comments"
+                data-category-id="DIC_kwDOML7fgM4C4DB9"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="bottom"
+                data-theme="dark"
+                data-lang="pt"
+                crossorigin="anonymous"
+                async>
+        </script>
+    </div>
+</section>
