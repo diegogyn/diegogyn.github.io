@@ -2,7 +2,7 @@
 <html lang="{{ page.lang | default: 'pt-BR' }}" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>{{ page.title | default: site.title }}</title>
     <meta name="description" content="{{ site.description }}">
     <meta name="author" content="{{ site.author }}">
@@ -29,11 +29,11 @@
     </style>
 </head>
 
-<body class="bg-gray-950 text-gray-200 font-sans leading-relaxed selection:bg-blue-500 selection:text-white flex flex-col min-h-screen overflow-x-hidden">
+<body class="bg-gray-950 text-gray-200 font-sans leading-relaxed selection:bg-blue-500 selection:text-white flex flex-col min-h-screen">
 
-    <!-- NAVBAR BLINDADA com Z-Index Máximo -->
-    <nav id="navbar" class="fixed top-0 left-0 w-full h-20 z-[99999] bg-gray-950/95 backdrop-blur-md border-b border-gray-800 transition-shadow duration-300">
-        <div class="max-w-6xl mx-auto px-6 h-full flex justify-between items-center">
+    <!-- NAVBAR BLINDADA - Ajustada para não transbordar e ficar perfeitamente alinhada -->
+    <nav id="navbar" class="fixed inset-x-0 top-0 w-full h-20 z-[99999] bg-gray-950/95 backdrop-blur-md border-b border-gray-800 transition-shadow duration-300">
+        <div class="w-full max-w-6xl mx-auto px-6 h-full flex justify-between items-center">
             
             <!-- Logo -->
             <a href="{{ site.url }}/" class="text-xl font-bold tracking-widest text-gray-200 hover:text-blue-400 transition">DM.</a>
@@ -55,8 +55,8 @@
                 {% endif %}
             </div>
 
-            <!-- Botão Hambúrguer Mobile (Agora usando SVG indestrutível) -->
-            <button id="nav-toggle" class="md:hidden p-2 text-gray-300 hover:text-white focus:outline-none" aria-label="Menu">
+            <!-- Botão Hambúrguer Mobile (O -mr-2 remove o "desalinhamento" à direita) -->
+            <button id="nav-toggle" class="md:hidden p-2 -mr-2 text-gray-300 hover:text-white focus:outline-none" aria-label="Menu">
                 <!-- Ícone Hambúrguer (Abre) -->
                 <svg id="icon-open" class="w-7 h-7 block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
@@ -69,7 +69,7 @@
         </div>
 
         <!-- Dropdown Menu Mobile -->
-        <div id="nav-mobile" class="hidden absolute top-[80px] left-0 w-full bg-gray-900 border-b border-gray-800 shadow-2xl">
+        <div id="nav-mobile" class="hidden absolute top-full left-0 w-full bg-gray-900 border-b border-gray-800 shadow-2xl">
             <div class="flex flex-col gap-6 px-6 py-8 text-base font-medium">
                 {% if page.lang == 'en' %}
                     <a href="/en.html#sobre" class="text-gray-300 hover:text-white mobile-link">About</a>
@@ -88,7 +88,7 @@
         </div>
     </nav>
 
-    <!-- Adicionado mt-20 (margem topo) para impedir que o site fique embaixo da Navbar -->
+    <!-- Conteúdo principal inicia logo abaixo da Navbar (mt-20) -->
     <main class="flex-grow w-full mt-20">
         {{ content }}
     </main>
@@ -111,7 +111,7 @@
             
             let isOpen = false;
 
-            // Script simplificado e sem bugs visuais para alternar o Menu Mobile
+            // Script limpo e seguro para alternar o Menu Mobile
             function toggleMenu() {
                 isOpen = !isOpen;
                 if (isOpen) {
