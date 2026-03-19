@@ -106,7 +106,7 @@
 <body class="bg-gray-950 text-gray-200 font-sans leading-relaxed selection:bg-blue-500 selection:text-white">
 
     <!-- ── NAVBAR ─────────────────────────────────────── -->
-    <nav id="navbar" style="position:fixed;top:0;left:0;width:100%;z-index:9999;background:rgba(3,7,18,0.88);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid #1f2937;transition:box-shadow .3s;">
+    <nav id="navbar" style="position:fixed;top:0;left:0;width:100%;z-index:9999;background:rgba(3,7,18,0.88);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid #1f2937;transition:box-shadow .3s;isolation:isolate;">
         <div style="max-width:72rem;margin:0 auto;padding:1rem 1.5rem;display:flex;justify-content:space-between;align-items:center;">
 
             <a href="{{ site.url }}/" class="nav-link" style="font-size:1.2rem;font-weight:700;letter-spacing:.1em;">DM.</a>
@@ -166,7 +166,7 @@
 
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     <script>
-        AOS.init({ duration: 800, once: true, offset: 100 });
+        AOS.init({ duration: 800, once: true, offset: 50, startEvent: "load", disableMutationObserver: false });
 
         // Sombra ao rolar
         window.addEventListener("scroll", function () {
