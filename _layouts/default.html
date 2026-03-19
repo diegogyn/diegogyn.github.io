@@ -7,7 +7,7 @@
     <meta name="description" content="{{ site.description }}">
     <meta name="author" content="{{ site.author }}">
 
-    <!-- Plugin Tailwind Typography adicionado para resolver o design do Markdown -->
+    <!-- Plugin Tailwind Typography adicionado para resolver perfeitamente o design do Markdown -->
     <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
@@ -31,7 +31,8 @@
 
 <body class="bg-gray-950 text-gray-200 font-sans leading-relaxed selection:bg-blue-500 selection:text-white flex flex-col min-h-screen">
 
-    <nav id="navbar" class="fixed top-0 w-full z-[100] bg-gray-950/90 backdrop-blur-md border-b border-gray-800 transition-all duration-300">
+    <!-- Navbar blindada: o translateZ e z-[9999] garantem que nenhuma animação passe por cima do menu -->
+    <nav id="navbar" class="fixed top-0 left-0 w-full z-[9999] bg-gray-950/95 backdrop-blur-md border-b border-gray-800 transition-all duration-300 isolate" style="transform: translateZ(0); -webkit-transform: translateZ(0);">
         <div class="max-w-6xl mx-auto px-6 h-20 flex justify-between items-center relative z-50">
             <a href="{{ site.url }}/" class="text-xl font-bold tracking-widest text-gray-200 hover:text-blue-400 transition">DM.</a>
 
@@ -52,16 +53,16 @@
                 {% endif %}
             </div>
 
-            <!-- Mobile Toggle -->
+            <!-- Mobile Toggle Button -->
             <button id="nav-toggle" aria-label="Menu" aria-expanded="false" class="md:hidden flex flex-col justify-center items-center gap-1.5 w-10 h-10 p-2 focus:outline-none z-50">
-                <span class="w-6 h-[2px] bg-gray-300 rounded-full transition-all duration-300 origin-center"></span>
-                <span class="w-6 h-[2px] bg-gray-300 rounded-full transition-all duration-300 origin-center"></span>
-                <span class="w-6 h-[2px] bg-gray-300 rounded-full transition-all duration-300 origin-center"></span>
+                <span class="block w-6 h-[2px] bg-gray-300 rounded-full transition-all duration-300 origin-center"></span>
+                <span class="block w-6 h-[2px] bg-gray-300 rounded-full transition-all duration-300 origin-center"></span>
+                <span class="block w-6 h-[2px] bg-gray-300 rounded-full transition-all duration-300 origin-center"></span>
             </button>
         </div>
 
-        <!-- Menu Mobile (Totalmente fixado e adaptado) -->
-        <div id="nav-mobile" class="hidden absolute top-20 left-0 w-full bg-gray-900 border-b border-gray-800 shadow-xl z-40">
+        <!-- Menu Mobile Overlay - Dropdown -->
+        <div id="nav-mobile" class="hidden absolute top-full left-0 w-full bg-gray-950 border-b border-gray-800 shadow-2xl z-40">
             <div class="flex flex-col gap-6 px-6 py-8 text-base font-medium">
                 {% if page.lang == 'en' %}
                     <a href="/en.html#sobre" class="text-gray-300 hover:text-white mobile-link">About</a>
@@ -80,23 +81,60 @@
         </div>
     </nav>
 
-    <!-- w-full injeta o restante dos componentes -->
+    <!-- Conteúdo principal -->
     <main class="flex-grow w-full">
         {{ content }}
     </main>
 
-    <footer class="bg-gray-950 border-t border-gray-900 text-gray-500 text-center py-8 text-sm mt-auto">
+    <footer class="bg-gray-950 border-t border-gray-900 text-gray-500 text-center py-8 text-sm mt-auto z-10">
         <p>© 2026 Diego Martins</p>
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Inicializa Animações (mas os do Hero estão removidos nos arquivos abaixo para não bugar o menu)
             AOS.init({ duration: 800, once: true, offset: 50 });
 
-            // Sombra da navbar ao rolar
+            const nav = document.getElementById('navbar');
+            const toggle = document.getElementById('nav-toggle');
+            const mobileMenu = document.getElementById('nav-mobile');
+            const lines = toggle.querySelectorAll('span');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+            let isOpen = false;
+
+            // Lógica unificada para abrir e fechar o menu mobile
+            function toggleMenu() {
+                isOpen = !isOpen;
+                toggle.setAttribute('aria-expanded', isOpen);
+                
+                if (isOpen) {
+                    mobileMenu.classList.remove('hidden');
+                    mobileMenu.classList.add('flex');
+                    lines[0].classList.add('translate-y-2', 'rotate-45');
+                    lines[1].classList.add('opacity-0');
+                    lines[2].classList.add('-translate-y-2', '-rotate-45');
+                } else {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenu.classList.remove('flex');
+                    lines[0].classList.remove('translate-y-2', 'rotate-45');
+                    lines[1].classList.remove('opacity-0');
+                    lines[2].classList.remove('-translate-y-2', '-rotate-45');
+                }
+            }
+
+            // Click no botão
+            toggle.addEventListener('click', toggleMenu);
+
+            // Fecha automaticamente ao clicar nos links
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (isOpen) toggleMenu();
+                });
+            });
+
+            // Sombra da navbar na rolagem
             window.addEventListener('scroll', () => {
-                const nav = document.getElementById('navbar');
                 if (window.scrollY > 50) {
                     nav.classList.add('shadow-lg', 'shadow-blue-900/10');
                 } else {
@@ -104,44 +142,7 @@
                 }
             });
 
-            // Lógica do Menu Mobile Refatorada
-            const toggle = document.getElementById('nav-toggle');
-            const mobileMenu = document.getElementById('nav-mobile');
-            const lines = toggle.querySelectorAll('span');
-            const mobileLinks = document.querySelectorAll('.mobile-link');
-            let isOpen = false;
-
-            function toggleMenu() {
-                isOpen = !isOpen;
-                toggle.setAttribute('aria-expanded', isOpen);
-                
-                if (isOpen) {
-                    mobileMenu.classList.remove('hidden');
-                    mobileMenu.classList.add('flex', 'flex-col');
-                    // Animação do botão de hambúrguer virando X
-                    lines[0].classList.add('translate-y-2', 'rotate-45');
-                    lines[1].classList.add('opacity-0');
-                    lines[2].classList.add('-translate-y-2', '-rotate-45');
-                } else {
-                    mobileMenu.classList.add('hidden');
-                    mobileMenu.classList.remove('flex', 'flex-col');
-                    // Retorna as barras ao original
-                    lines[0].classList.remove('translate-y-2', 'rotate-45');
-                    lines[1].classList.remove('opacity-0');
-                    lines[2].classList.remove('-translate-y-2', '-rotate-45');
-                }
-            }
-
-            toggle.addEventListener('click', toggleMenu);
-
-            // Fecha o menu ao clicar nos links mobile
-            mobileLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    if (isOpen) toggleMenu();
-                });
-            });
-
-            // Restaura o menu caso a pessoa gire a tela para desktop
+            // Previne bug do menu se girar o tablet para Desktop
             window.addEventListener('resize', () => {
                 if (window.innerWidth >= 768 && isOpen) {
                     toggleMenu();
