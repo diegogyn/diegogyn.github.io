@@ -3,18 +3,17 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title | default: site.title }}</title>
-
     <meta name="description" content="{{ site.description }}">
     <meta name="author" content="{{ site.author }}">
-    
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
 
     <style>
-        /* Utilitários gerais */
+        /* ── GERAL ──────────────────────────────────── */
         .gradient-text {
             background: linear-gradient(90deg, #3b82f6, #06b6d4);
             -webkit-background-clip: text;
@@ -26,36 +25,98 @@
         .card-hover:hover {
             transform: translateY(-5px);
             border-color: #3b82f6;
-            box-shadow: 0 10px 30px -10px rgba(59, 130, 246, 0.3);
+            box-shadow: 0 10px 30px -10px rgba(59,130,246,0.3);
         }
 
-        /* Nav e Links */
-        .nav-link { transition: color 0.2s; }
-        .nav-link:hover { color: #60a5fa; }
-        
-        /* Correção de Renderização Forçada para iOS/Safari */
-        .force-hardware-render {
+        /* ── NAVBAR ─────────────────────────────────── */
+        /*
+         * A navbar usa transform:translateZ(0) para forçar um contexto
+         * de composição de GPU próprio, garantindo que ela sempre fique
+         * acima de qualquer elemento com transform/opacity do AOS.
+         */
+        #navbar {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%;
+            z-index: 9999;
+            transform: translateZ(0);          /* contexto GPU próprio */
             -webkit-transform: translateZ(0);
-            -webkit-backface-visibility: hidden;
-            will-change: transform, background-color, border-color, box-shadow;
+            background: rgba(3, 7, 18, 0.90);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid #1f2937;
+            transition: box-shadow 0.3s;
+        }
+        #navbar .inner {
+            max-width: 72rem;
+            margin: 0 auto;
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-logo {
+            font-size: 1.2rem; font-weight: 700;
+            letter-spacing: .1em; color: #e5e7eb;
+            text-decoration: none; transition: color .2s;
+        }
+        .nav-logo:hover { color: #60a5fa; }
+        .nav-link { color: #d1d5db; text-decoration: none; transition: color .2s; font-size: .875rem; font-weight: 500; }
+        .nav-link:hover { color: #60a5fa; }
+        .nav-link-active { color: #60a5fa; }
+        .nav-flag {
+            display: inline-flex; align-items: center; gap: .4rem;
+            background: #1f2937; border: 1px solid #374151;
+            padding: .25rem .7rem; border-radius: 999px;
+            color: #d1d5db; text-decoration: none; font-size: .8rem; font-weight: 500;
+            transition: background .2s;
+        }
+        .nav-flag img { width: 1rem; height: .75rem; border-radius: 2px; }
+        .nav-flag:hover { background: #374151; }
+
+        /* Desktop: mostra links, esconde hamburguer */
+        #nav-links   { display: none; }
+        #nav-toggle  { display: flex; }
+        #nav-mobile  { display: none; }
+
+        @media (min-width: 768px) {
+            #nav-links  { display: flex; align-items: center; gap: 2rem; }
+            #nav-toggle { display: none; }
+            #nav-mobile { display: none !important; }
         }
 
-        /* Animação do Hamburguer via CSS */
-        #menu-toggle.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-        #menu-toggle.open span:nth-child(2) { opacity: 0; }
-        #menu-toggle.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+        /* Hamburguer */
+        #nav-toggle {
+            flex-direction: column; justify-content: center; align-items: center;
+            gap: 5px; width: 36px; height: 36px;
+            background: none; border: none; cursor: pointer; padding: 4px;
+        }
+        .hline {
+            display: block; width: 22px; height: 2px;
+            background: #d1d5db; border-radius: 2px;
+            transition: transform .3s ease, opacity .3s ease;
+        }
+
+        /* Mobile dropdown */
+        #nav-mobile {
+            flex-direction: column; gap: 1rem;
+            padding: 1rem 1.5rem 1.25rem;
+            border-top: 1px solid #1f2937;
+        }
 
         /* ── POST CONTENT ───────────────────────────── */
         .post-content { line-height: 1.85; color: #d1d5db; }
         .post-content p { margin-top: 0; margin-bottom: 1.4rem; }
-        .post-content h1, .post-content h2, .post-content h3, .post-content h4 {
-            color: #ffffff; font-weight: 700; line-height: 1.3; margin-top: 2.5rem; margin-bottom: 1rem;
+        .post-content h1, .post-content h2,
+        .post-content h3, .post-content h4 {
+            color: #fff; font-weight: 700;
+            line-height: 1.3; margin-top: 2.5rem; margin-bottom: 1rem;
         }
         .post-content h1 { font-size: 2rem; }
         .post-content h2 { font-size: 1.5rem; border-bottom: 1px solid #1f2937; padding-bottom: .4rem; }
         .post-content h3 { font-size: 1.2rem; color: #93c5fd; }
         .post-content h4 { font-size: 1rem;   color: #93c5fd; }
-        .post-content strong { color: #ffffff; font-weight: 600; }
+        .post-content strong { color: #fff; font-weight: 600; }
         .post-content em { color: #e5e7eb; font-style: italic; }
         .post-content a { color: #60a5fa; text-decoration: none; }
         .post-content a:hover { text-decoration: underline; }
@@ -64,10 +125,26 @@
         .post-content ol { list-style-type: decimal; }
         .post-content li { margin-bottom: .4rem; color: #d1d5db; }
         .post-content li::marker { color: #3b82f6; }
-        .post-content code { background: #111827; color: #60a5fa; padding: .15em .45em; border-radius: 4px; font-size: .875em; font-family: 'Courier New', monospace; }
-        .post-content pre { background: #0f172a; border: 1px solid #1e293b; border-radius: .75rem; padding: 1.25rem 1.5rem; overflow-x: auto; margin-bottom: 1.6rem; margin-top: .5rem; }
-        .post-content pre code { background: transparent; color: #93c5fd; padding: 0; font-size: .9em; border-radius: 0; }
-        .post-content blockquote { border-left: 3px solid #3b82f6; background: #111827; color: #9ca3af; padding: .75rem 1.25rem; border-radius: 0 .5rem .5rem 0; margin: 1.5rem 0; font-style: italic; }
+        .post-content code {
+            background: #111827; color: #60a5fa;
+            padding: .15em .45em; border-radius: 4px;
+            font-size: .875em; font-family: 'Courier New', monospace;
+        }
+        .post-content pre {
+            background: #0f172a; border: 1px solid #1e293b;
+            border-radius: .75rem; padding: 1.25rem 1.5rem;
+            overflow-x: auto; margin-bottom: 1.6rem; margin-top: .5rem;
+        }
+        .post-content pre code {
+            background: transparent; color: #93c5fd;
+            padding: 0; font-size: .9em;
+        }
+        .post-content blockquote {
+            border-left: 3px solid #3b82f6; background: #111827;
+            color: #9ca3af; padding: .75rem 1.25rem;
+            border-radius: 0 .5rem .5rem 0; margin: 1.5rem 0; font-style: italic;
+        }
+        .post-content blockquote p { margin-bottom: 0; }
         .post-content hr { border: none; border-top: 1px solid #1f2937; margin: 2.5rem 0; }
         .post-content table { width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; font-size: .9rem; }
         .post-content th { background: #1f2937; color: #fff; font-weight: 600; padding: .6rem 1rem; text-align: left; border: 1px solid #374151; }
@@ -76,52 +153,52 @@
     </style>
 </head>
 
-<body class="bg-gray-950 text-gray-200 font-sans leading-relaxed antialiased selection:bg-blue-500 selection:text-white pt-24">
+<body class="bg-gray-950 text-gray-200 font-sans leading-relaxed selection:bg-blue-500 selection:text-white">
 
-    <nav id="navbar" class="fixed top-0 left-0 w-full z-[9999] bg-gray-950/85 backdrop-blur-lg border-b border-gray-800 transition-all duration-300 force-hardware-render">
-        <div class="max-w-6xl mx-auto px-6 h-20 flex justify-between items-center relative z-20">
-            
-            <a href="{{ site.url }}/" class="text-xl font-bold tracking-widest text-gray-200 hover:text-white transition">DM.</a>
+    <nav id="navbar">
+        <div class="inner">
+            <a href="{{ site.url }}/" class="nav-logo">DM.</a>
 
-            <div class="hidden md:flex items-center gap-8 text-sm font-medium">
+            <!-- Links desktop -->
+            <div id="nav-links">
                 {% if page.lang == 'en' %}
-                    <a href="/en.html#sobre" class="nav-link text-gray-300">About</a>
-                    <a href="/en.html#experiencia" class="nav-link text-gray-300">Public Sector</a>
-                    <a href="/en.html#stack" class="nav-link text-gray-300">Stack</a>
-                    <a href="/blog.html" class="nav-link text-blue-400">Blog</a>
-                    <a href="/" class="flex items-center gap-2 bg-gray-800 hover:bg-gray-700 border border-gray-700 px-3 py-1.5 rounded-full text-gray-300 transition"><img src="https://flagcdn.com/w20/br.png" alt="PT" class="w-4"> PT</a>
+                    <a href="/en.html#sobre"       class="nav-link">About</a>
+                    <a href="/en.html#experiencia" class="nav-link">Public Sector</a>
+                    <a href="/en.html#stack"       class="nav-link">Stack</a>
+                    <a href="/blog.html"           class="nav-link nav-link-active">Blog</a>
+                    <a href="/" class="nav-flag"><img src="https://flagcdn.com/w20/br.png" alt="PT"> PT</a>
                 {% else %}
-                    <a href="/#sobre" class="nav-link text-gray-300">Sobre</a>
-                    <a href="/#experiencia" class="nav-link text-gray-300">Setor Público</a>
-                    <a href="/#stack" class="nav-link text-gray-300">Stack</a>
-                    <a href="/blog.html" class="nav-link text-blue-400">Blog</a>
-                    <a href="/en.html" class="flex items-center gap-2 bg-gray-800 hover:bg-gray-700 border border-gray-700 px-3 py-1.5 rounded-full text-gray-300 transition"><img src="https://flagcdn.com/w20/us.png" alt="EN" class="w-4"> EN</a>
+                    <a href="/#sobre"       class="nav-link">Sobre</a>
+                    <a href="/#experiencia" class="nav-link">Setor Público</a>
+                    <a href="/#stack"       class="nav-link">Stack</a>
+                    <a href="/blog.html"    class="nav-link nav-link-active">Blog</a>
+                    <a href="/en.html" class="nav-flag"><img src="https://flagcdn.com/w20/us.png" alt="EN"> EN</a>
                 {% endif %}
             </div>
 
-            <button id="menu-toggle" aria-expanded="false" class="md:hidden flex flex-col justify-center items-center gap-1.5 w-10 h-10 bg-transparent border-none outline-none focus:outline-none z-30 cursor-pointer">
-                <span class="block w-6 h-[2px] bg-gray-300 rounded-full transition-transform duration-300 origin-center"></span>
-                <span class="block w-6 h-[2px] bg-gray-300 rounded-full transition-opacity duration-300"></span>
-                <span class="block w-6 h-[2px] bg-gray-300 rounded-full transition-transform duration-300 origin-center"></span>
+            <!-- Botão hamburguer -->
+            <button id="nav-toggle" aria-label="Abrir menu">
+                <span class="hline"></span>
+                <span class="hline"></span>
+                <span class="hline"></span>
             </button>
         </div>
 
-        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-gray-900 border-b border-gray-800 shadow-2xl force-hardware-render">
-            <div class="flex flex-col gap-6 px-6 py-8 text-base font-medium">
-                {% if page.lang == 'en' %}
-                    <a href="/en.html#sobre" class="text-gray-300 hover:text-white mobile-link">About</a>
-                    <a href="/en.html#experiencia" class="text-gray-300 hover:text-white mobile-link">Public Sector</a>
-                    <a href="/en.html#stack" class="text-gray-300 hover:text-white mobile-link">Stack</a>
-                    <a href="/blog.html" class="text-blue-400 mobile-link">Blog</a>
-                    <a href="/" class="flex items-center gap-2 bg-gray-800 border border-gray-700 w-fit px-4 py-2 rounded-full text-gray-300 mt-2"><img src="https://flagcdn.com/w20/br.png" alt="PT" class="w-4"> PT</a>
-                {% else %}
-                    <a href="/#sobre" class="text-gray-300 hover:text-white mobile-link">Sobre</a>
-                    <a href="/#experiencia" class="text-gray-300 hover:text-white mobile-link">Setor Público</a>
-                    <a href="/#stack" class="text-gray-300 hover:text-white mobile-link">Stack</a>
-                    <a href="/blog.html" class="text-blue-400 mobile-link">Blog</a>
-                    <a href="/en.html" class="flex items-center gap-2 bg-gray-800 border border-gray-700 w-fit px-4 py-2 rounded-full text-gray-300 mt-2"><img src="https://flagcdn.com/w20/us.png" alt="EN" class="w-4"> EN</a>
-                {% endif %}
-            </div>
+        <!-- Menu mobile -->
+        <div id="nav-mobile">
+            {% if page.lang == 'en' %}
+                <a href="/en.html#sobre"       class="nav-link">About</a>
+                <a href="/en.html#experiencia" class="nav-link">Public Sector</a>
+                <a href="/en.html#stack"       class="nav-link">Stack</a>
+                <a href="/blog.html"           class="nav-link-active" style="text-decoration:none;">Blog</a>
+                <a href="/" class="nav-flag" style="align-self:flex-start;"><img src="https://flagcdn.com/w20/br.png" alt="PT"> PT</a>
+            {% else %}
+                <a href="/#sobre"       class="nav-link">Sobre</a>
+                <a href="/#experiencia" class="nav-link">Setor Público</a>
+                <a href="/#stack"       class="nav-link">Stack</a>
+                <a href="/blog.html"    class="nav-link-active" style="text-decoration:none;">Blog</a>
+                <a href="/en.html" class="nav-flag" style="align-self:flex-start;"><img src="https://flagcdn.com/w20/us.png" alt="EN"> EN</a>
+            {% endif %}
         </div>
     </nav>
 
@@ -135,60 +212,39 @@
 
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     <script>
-        // Inicialização do AOS
-        AOS.init({ 
-            duration: 800, 
-            once: true, 
-            offset: 50, 
-            startEvent: "DOMContentLoaded", 
-            disableMutationObserver: false 
+        AOS.init({ duration: 800, once: true, offset: 80 });
+
+        // Sombra ao rolar
+        window.addEventListener('scroll', function () {
+            document.getElementById('navbar').style.boxShadow =
+                window.scrollY > 50 ? '0 4px 24px rgba(0,0,0,.6)' : '';
         });
 
-        // Controle da Navbar e Sombras
-        const navbar = document.getElementById("navbar");
-        const toggle = document.getElementById("menu-toggle");
-        const mobileMenu = document.getElementById("mobile-menu");
-        const mobileLinks = document.querySelectorAll(".mobile-link");
+        // Hamburguer
+        var toggle  = document.getElementById('nav-toggle');
+        var mobile  = document.getElementById('nav-mobile');
+        var lines   = document.querySelectorAll('.hline');
+        var open    = false;
 
-        // Aplica sombra apenas quando rolar a página
-        window.addEventListener("scroll", () => {
-            if (window.scrollY > 20) {
-                navbar.classList.add("shadow-[0_4px_30px_rgba(0,0,0,0.5)]");
-                navbar.classList.remove("border-gray-800");
-                navbar.classList.add("border-gray-800/50");
-            } else {
-                navbar.classList.remove("shadow-[0_4px_30px_rgba(0,0,0,0.5)]");
-                navbar.classList.add("border-gray-800");
-                navbar.classList.remove("border-gray-800/50");
-            }
-        });
-
-        // Lógica de Abrir/Fechar o Menu Hamburguer
-        function toggleMenu() {
-            const isExpanded = toggle.getAttribute("aria-expanded") === "true";
-            toggle.setAttribute("aria-expanded", !isExpanded);
-            toggle.classList.toggle("open");
-            mobileMenu.classList.toggle("hidden");
+        function openMenu() {
+            open = true;
+            mobile.style.display = 'flex';
+            lines[0].style.transform = 'translateY(7px) rotate(45deg)';
+            lines[1].style.opacity   = '0';
+            lines[2].style.transform = 'translateY(-7px) rotate(-45deg)';
+        }
+        function closeMenu() {
+            open = false;
+            mobile.style.display = 'none';
+            lines[0].style.transform = '';
+            lines[1].style.opacity   = '';
+            lines[2].style.transform = '';
         }
 
-        toggle.addEventListener("click", toggleMenu);
+        toggle.addEventListener('click', function () { open ? closeMenu() : openMenu(); });
 
-        // Fecha o menu automaticamente se clicar em um dos links no celular
-        mobileLinks.forEach(link => {
-            link.addEventListener("click", () => {
-                if (!mobileMenu.classList.contains("hidden")) {
-                    toggleMenu();
-                }
-            });
-        });
-
-        // Previne bug visual se o usuário abrir o menu no celular e deitar a tela (landscape para desktop)
-        window.addEventListener("resize", () => {
-            if (window.innerWidth >= 768 && !mobileMenu.classList.contains("hidden")) {
-                toggle.setAttribute("aria-expanded", "false");
-                toggle.classList.remove("open");
-                mobileMenu.classList.add("hidden");
-            }
+        mobile.querySelectorAll('a').forEach(function (a) {
+            a.addEventListener('click', closeMenu);
         });
     </script>
 </body>
