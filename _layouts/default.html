@@ -41,17 +41,6 @@
         }
         .nav-flag:hover { background:#374151; }
 
-        /* Mobile: hamburguer visível, desktop oculto */
-        #nav-desktop { display: none; }
-        #menu-toggle  { display: flex; }
-
-        /* Desktop (≥768px): inverte */
-        @media (min-width: 768px) {
-            #nav-desktop  { display: flex !important; }
-            #menu-toggle  { display: none  !important; }
-            #mobile-menu  { display: none  !important; }
-        }
-
         /* ── POST CONTENT ───────────────────────────── */
         .post-content { line-height: 1.85; color: #d1d5db; }
         .post-content p { margin-top: 0; margin-bottom: 1.4rem; }
@@ -105,14 +94,12 @@
 
 <body class="bg-gray-950 text-gray-200 font-sans leading-relaxed selection:bg-blue-500 selection:text-white">
 
-    <!-- ── NAVBAR ─────────────────────────────────────── -->
     <nav id="navbar" style="position:fixed;top:0;left:0;width:100%;z-index:9999;background:rgba(3,7,18,0.88);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid #1f2937;transition:box-shadow .3s;isolation:isolate;">
         <div style="max-width:72rem;margin:0 auto;padding:1rem 1.5rem;display:flex;justify-content:space-between;align-items:center;">
 
             <a href="{{ site.url }}/" class="nav-link" style="font-size:1.2rem;font-weight:700;letter-spacing:.1em;">DM.</a>
 
-            <!-- Desktop links -->
-            <div id="nav-desktop" style="gap:2rem;font-size:.875rem;font-weight:500;align-items:center;">
+            <div id="nav-desktop" class="hidden md:flex" style="gap:2rem;font-size:.875rem;font-weight:500;align-items:center;">
                 {% if page.lang == 'en' %}
                     <a href="/en.html#sobre"      class="nav-link">About</a>
                     <a href="/en.html#experiencia" class="nav-link">Public Sector</a>
@@ -128,8 +115,7 @@
                 {% endif %}
             </div>
 
-            <!-- Hamburguer button -->
-            <button id="menu-toggle" aria-label="Abrir menu"
+            <button id="menu-toggle" aria-label="Abrir menu" class="flex md:hidden"
                 style="flex-direction:column;justify-content:center;align-items:center;gap:5px;
                        width:36px;height:36px;background:none;border:none;cursor:pointer;padding:4px;">
                 <span class="hline" style="display:block;width:22px;height:2px;background:#d1d5db;border-radius:2px;transition:transform .3s,opacity .3s;"></span>
@@ -138,8 +124,7 @@
             </button>
         </div>
 
-        <!-- Mobile dropdown -->
-        <div id="mobile-menu" style="display:none;flex-direction:column;gap:1.1rem;padding:1rem 1.5rem 1.4rem;border-top:1px solid #1f2937;font-size:.95rem;font-weight:500;">
+        <div id="mobile-menu" class="md:!hidden" style="display:none;flex-direction:column;gap:1.1rem;padding:1rem 1.5rem 1.4rem;border-top:1px solid #1f2937;font-size:.95rem;font-weight:500;">
             {% if page.lang == 'en' %}
                 <a href="/en.html#sobre"       class="nav-link">About</a>
                 <a href="/en.html#experiencia"  class="nav-link">Public Sector</a>
@@ -204,6 +189,17 @@
                 lines[1].style.opacity   = "";
                 lines[2].style.transform = "";
             });
+        });
+
+        // Evita que o menu fique "aberto" visualmente ao rotacionar a tela do celular para modo paisagem/desktop
+        window.addEventListener("resize", function() {
+            if (window.innerWidth >= 768 && isOpen) {
+                isOpen = false;
+                mobileMenu.style.display = "none";
+                lines[0].style.transform = "";
+                lines[1].style.opacity   = "";
+                lines[2].style.transform = "";
+            }
         });
     </script>
 </body>
