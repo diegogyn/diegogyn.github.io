@@ -10,8 +10,6 @@ Apesar de ser uma carreira estratégica para o Estado, as informações disponí
 
 Foi nesse contexto que nasceu o Observatório: **transformar dados públicos brutos em informação acessível, estruturada e útil para análise**.
 
----
-
 ## 🎯 Motivação
 
 A principal motivação foi a ausência de transparência prática sobre a carreira. Embora os dados existam no Portal da Transparência, eles não estão organizados de forma que permita análises diretas.
@@ -24,8 +22,6 @@ O projeto busca responder perguntas como:
 * Existe crescimento ou estagnação do quadro ao longo do tempo?
 
 Além disso, há um objetivo mais amplo: **gerar evidência empírica para discussões sobre políticas públicas de tecnologia no Estado**.
-
----
 
 ## ⚙️ Arquitetura da Solução
 
@@ -48,8 +44,6 @@ Um ponto crítico foi a **reconstrução das funções comissionadas**, que exig
 
 Outro detalhe importante foi a identificação automática da data de referência a partir do nome do arquivo, permitindo versionamento temporal dos dados.
 
----
-
 ### 2. Camada de Visualização
 
 Com os dados tratados, foi construída uma interface interativa utilizando Streamlit.
@@ -63,8 +57,6 @@ O dashboard permite:
 * Comparação entre ingressos e desligamentos
 
 Para garantir performance, foi utilizado cache em memória, evitando recarregamento desnecessário dos dados.
-
----
 
 ## 🚀 Automação e Engenharia
 
@@ -85,8 +77,6 @@ Sempre que um novo arquivo é adicionado:
 
 Isso garante que o Observatório esteja sempre atualizado sem necessidade de intervenção manual.
 
----
-
 ## ⚠️ Desafios Encontrados
 
 Durante o desenvolvimento, alguns desafios técnicos se destacaram:
@@ -98,8 +88,6 @@ Durante o desenvolvimento, alguns desafios técnicos se destacaram:
 
 A solução adotada foi centralizar toda a complexidade no ETL, entregando ao dashboard apenas dados já prontos para consumo.
 
----
-
 ## 📊 Resultado
 
 O resultado é um painel interativo que permite analisar a carreira ATI de forma clara, rápida e baseada em dados.
@@ -110,8 +98,6 @@ Mais do que um dashboard, o Observatório se torna uma ferramenta de apoio para:
 * Discussões institucionais
 * Estudos sobre governança digital
 * Análise da evolução da força de trabalho em TI no governo
-
----
 
 ## 🔍 Considerações Finais
 
