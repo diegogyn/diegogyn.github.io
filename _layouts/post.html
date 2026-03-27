@@ -3,9 +3,8 @@ layout: default
 ---
 
 <article class="max-w-4xl mx-auto px-6 py-16 min-h-[calc(100vh-5rem)]">
-    <!-- Cabeçalho do Post -->
     <header class="mb-10 text-center" data-aos="fade-down">
-        <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">{{ page.title }}</h1>
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">{{ page.title }}</h1>
         <p class="text-blue-400 font-medium flex items-center justify-center gap-2">
             <i class="fas fa-calendar-alt"></i> 
             {% if page.date %}
@@ -14,16 +13,13 @@ layout: default
         </p>
     </header>
 
-    <!-- Plugin Tailwind Typography cuidando da formatação do Markdown -->
-    <div class="prose prose-invert prose-lg prose-blue max-w-none bg-gray-900 p-8 md:p-12 rounded-2xl border border-gray-800 shadow-xl" data-aos="fade-up">
+    <div class="prose prose-gray dark:prose-invert prose-lg prose-blue max-w-none bg-white dark:bg-gray-900 p-8 md:p-12 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-xl" data-aos="fade-up">
         {{ content }}
     </div>
     
-    <!-- GISCUS (Comentários) -->
-    <section id="comentarios" class="mt-16 pt-16 border-t border-gray-800">
-        <h2 class="text-3xl font-bold mb-8 text-center text-white" data-aos="fade-up">Deixe seu <span class="text-blue-400">Comentário</span></h2>
+    <section id="comentarios" class="mt-16 pt-16 border-t border-gray-200 dark:border-gray-800">
+        <h2 class="text-3xl font-bold mb-8 text-center text-gray-900 dark:text-white" data-aos="fade-up">Deixe seu <span class="text-blue-400">Comentário</span></h2>
         <div data-aos="fade-up" data-aos-delay="100">
-            <!-- O script abaixo adapta o idioma (pt/en) automaticamente! -->
             <script src="https://giscus.app/client.js"
                     data-repo="diegogyn/diegogyn.github.io"
                     data-repo-id="R_kgDOML7fgA"
@@ -42,9 +38,8 @@ layout: default
         </div>
     </section>
 
-    <!-- Botão de Voltar -->
     <div class="mt-16 text-center" data-aos="fade-up">
-        <a href="/blog.html" class="inline-flex items-center gap-2 text-gray-400 hover:text-blue-400 transition font-medium">
+        <a href="/blog.html" class="inline-flex items-center gap-2 text-gray-500 dark:text-gray-400 hover:text-blue-400 transition font-medium">
             <i class="fas fa-arrow-left"></i> 
             {% if page.lang == 'en' %}Back to Blog{% else %}Voltar para o Blog{% endif %}
         </a>

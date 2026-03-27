@@ -1,132 +1,182 @@
----
-layout: default
-title: "Diego Martins - Portfolio"
-lang: "en"
----
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Diego Martins - Portfolio</title>
+    <meta name="description" content="IT Analyst specialized in Public Sector governance, infrastructure and automation.">
+    <meta name="author" content="Diego Martins">
 
-<!-- HERO -->
-<section class="min-h-[calc(100vh-5rem)] flex flex-col justify-center items-center text-center px-6 pb-10">
-    <span class="text-blue-400 font-medium tracking-widest uppercase mb-4 text-sm" data-aos="fade-down">Professional Portfolio</span>
-    <h1 class="text-5xl md:text-7xl font-extrabold mb-6 leading-tight gradient-text" data-aos="zoom-in">
-        Diego Martins
-    </h1>
-    <p class="text-lg md:text-xl text-gray-400 max-w-3xl mb-10" data-aos="fade-up" data-aos-delay="100">
-        Information Technology Analyst (ATI)<br>
-        <span class="text-gray-300">Connecting Public Sector Governance to IT Infrastructure and Automation Efficiency.</span>
-    </p>
-    <div class="flex flex-col sm:flex-row gap-4 mt-4" data-aos="fade-up" data-aos-delay="200">
-        <a href="#contato" class="bg-blue-600 px-8 py-3 rounded-lg font-medium hover:bg-blue-500 transition shadow-lg shadow-blue-500/30 flex items-center justify-center gap-2 text-white">
-            <i class="fas fa-envelope"></i> Contact Me
-        </a>
-        <a href="https://github.com/diegogyn" target="_blank" class="bg-gray-800 border border-gray-700 px-8 py-3 rounded-lg font-medium hover:border-gray-500 hover:bg-gray-700 transition flex items-center justify-center gap-2 text-white">
-            <i class="fab fa-github text-xl"></i> My GitHub
-        </a>
-    </div>
-</section>
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
 
-<!-- ABOUT -->
-<section id="sobre" class="max-w-6xl mx-auto px-6 py-24 border-t border-gray-800 scroll-mt-28">
-    <div class="grid md:grid-cols-2 gap-12 items-center">
-        <div data-aos="fade-right">
-            <h2 class="text-3xl font-bold mb-6 text-white">Profile: <br><span class="text-blue-400">Governance & Operations</span></h2>
-            <div class="max-w-xl">
-                <p class="text-gray-400 leading-relaxed mb-4 text-justify">
-                    With a solid track record in the federal public service, I ensure strategic IT governance and flawless infrastructure operation.
-                </p>
-                <p class="text-gray-400 leading-relaxed text-justify">
-                    Currently, I lead Contract Management and Digital Transformation initiatives. In parallel, I use programming to support infrastructure, creating scripts and automations to optimize routines, manage servers, and reduce support time.
-                </p>
+    <style>
+        .gradient-text {
+            background: linear-gradient(90deg, #3b82f6, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            padding-bottom: 0.15em;
+            display: inline-block;
+        }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            border-color: #3b82f6;
+            box-shadow: 0 10px 30px -10px rgba(59,130,246,0.3);
+        }
+    </style>
+</head>
+
+<body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-200 font-sans leading-relaxed selection:bg-blue-500 selection:text-white flex flex-col min-h-screen">
+
+    <nav id="navbar" class="fixed inset-x-0 top-0 w-full h-20 z-[99999] bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 transition-shadow duration-300">
+        <div class="w-full max-w-6xl mx-auto px-6 h-full flex justify-between items-center">
+            <a href="/en.html" class="text-xl font-bold tracking-widest text-gray-900 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition">DM.</a>
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium">
+                <a href="/en.html#sobre" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition">About</a>
+                <a href="/en.html#experiencia" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition">Public Sector</a>
+                <a href="/en.html#stack" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition">Stack</a>
+                <a href="/blog.html" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition">Blog</a>
+                <button class="theme-toggle flex items-center justify-center p-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition" aria-label="Toggle theme">
+                    <i class="sun-icon fas fa-sun text-xl"></i>
+                    <i class="moon-icon fas fa-moon text-xl hidden"></i>
+                </button>
+                <a href="/" class="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700 px-3 py-1 rounded-full text-gray-700 dark:text-gray-300 transition">
+                    <img src="https://flagcdn.com/w20/br.png" alt="PT" class="w-4 h-3 rounded-sm object-cover"> PT
+                </a>
+            </div>
+            <button id="nav-toggle" class="md:hidden p-2 -mr-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white focus:outline-none" aria-label="Menu">
+                <svg id="icon-open" class="w-7 h-7 block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                <svg id="icon-close" class="w-7 h-7 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </div>
+        <div id="nav-mobile" class="hidden absolute top-full left-0 w-full bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 shadow-2xl">
+            <div class="flex flex-col gap-6 px-6 py-8 text-base font-medium">
+                <a href="/en.html#sobre" class="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white mobile-link">About</a>
+                <a href="/en.html#experiencia" class="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white mobile-link">Public Sector</a>
+                <a href="/en.html#stack" class="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white mobile-link">Stack</a>
+                <a href="/blog.html" class="mobile-link text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">Blog</a>
+                <button class="theme-toggle mx-auto flex items-center justify-center p-3 border border-gray-200 dark:border-gray-700 rounded-full text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition" aria-label="Toggle theme">
+                    <i class="sun-icon fas fa-sun text-xl"></i>
+                    <i class="moon-icon fas fa-moon text-xl hidden"></i>
+                </button>
+                <a href="/" class="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 w-fit px-4 py-2 rounded-full text-gray-700 dark:text-gray-300 mt-2">
+                    <img src="https://flagcdn.com/w20/br.png" alt="PT" class="w-4 h-3 rounded-sm object-cover"> PT
+                </a>
             </div>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" data-aos="fade-left">
-            <div class="bg-gray-900 p-6 rounded-xl border border-gray-800 text-center flex flex-col justify-between h-full card-hover">
-                <div>
-                    <i class="fas fa-landmark text-4xl text-blue-500 mb-4"></i>
-                    <h3 class="font-bold text-white">Public Sector</h3>
-                    <p class="text-sm text-gray-500 mt-2">Governance, Contracts, and Public Policies.</p>
+    </nav>
+
+    <main class="flex-grow w-full mt-20">
+        <!-- O conteúdo existente da página em inglês continua aqui, mas com classes adaptadas -->
+        <section class="min-h-[calc(100vh-5rem)] flex flex-col justify-center items-center text-center px-6 pb-10">
+            <span class="text-blue-400 font-medium tracking-widest uppercase mb-4 text-sm" data-aos="fade-down">Professional Portfolio</span>
+            <h1 class="text-5xl md:text-7xl font-extrabold mb-6 leading-tight gradient-text" data-aos="zoom-in">Diego Martins</h1>
+            <p class="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mb-10" data-aos="fade-up" data-aos-delay="100">
+                Information Technology Analyst (ATI)<br>
+                <span class="text-gray-800 dark:text-gray-300">Connecting Public Sector Governance to IT Infrastructure & Automation Efficiency.</span>
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 mt-4" data-aos="fade-up" data-aos-delay="200">
+                <a href="#contato" class="bg-blue-600 px-8 py-3 rounded-lg font-medium hover:bg-blue-500 transition shadow-lg shadow-blue-500/30 flex items-center justify-center gap-2 text-white"><i class="fas fa-envelope"></i> Contact Me</a>
+                <a href="https://github.com/diegogyn" target="_blank" class="bg-gray-200 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 px-8 py-3 rounded-lg font-medium hover:border-gray-500 dark:hover:border-gray-500 hover:bg-gray-300 dark:hover:bg-gray-700 transition flex items-center justify-center gap-2 text-gray-800 dark:text-white"><i class="fab fa-github text-xl"></i> My GitHub</a>
+            </div>
+        </section>
+
+        <section id="sobre" class="max-w-6xl mx-auto px-6 py-24 border-t border-gray-200 dark:border-gray-800 scroll-mt-28">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div data-aos="fade-right">
+                    <h2 class="text-3xl font-bold mb-6 text-gray-900 dark:text-white">Profile: <br><span class="text-blue-400">Governance & Operations</span></h2>
+                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed">With a solid career in the federal public service, I ensure IT strategic governance and flawless infrastructure operations.</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" data-aos="fade-left">
+                    <div class="bg-gray-100 dark:bg-gray-900 p-6 rounded-xl border border-gray-200 dark:border-gray-800 text-center card-hover"><i class="fas fa-landmark text-4xl text-blue-500 mb-4"></i><h3 class="font-bold text-gray-900 dark:text-white">Public Management</h3><p class="text-sm text-gray-500 dark:text-gray-500">Governance, Contracts & Public Policies.</p></div>
+                    <div class="bg-gray-100 dark:bg-gray-900 p-6 rounded-xl border border-gray-200 dark:border-gray-800 text-center card-hover"><i class="fas fa-server text-4xl text-cyan-500 mb-4"></i><h3 class="font-bold text-gray-900 dark:text-white">Infra & Automation</h3><p class="text-sm text-gray-500 dark:text-gray-500">Networks, Servers, Scripts & Python.</p></div>
                 </div>
             </div>
-            <div class="bg-gray-900 p-6 rounded-xl border border-gray-800 text-center flex flex-col justify-between h-full card-hover">
-                <div>
-                    <i class="fas fa-server text-4xl text-cyan-500 mb-4"></i>
-                    <h3 class="font-bold text-white">Infra & Automation</h3>
-                    <p class="text-sm text-gray-500 mt-2">Networks, Servers, Scripts, and Python.</p>
+        </section>
+
+        <section id="experiencia" class="bg-gray-50 dark:bg-gray-900/50 py-24 px-6 border-y border-gray-200 dark:border-gray-800 scroll-mt-28">
+            <div class="max-w-5xl mx-auto">
+                <h2 class="text-3xl font-bold mb-12 text-center text-gray-900 dark:text-white">Strategic Role <span class="text-blue-400">in the Public Sector</span></h2>
+                <div class="space-y-6">
+                    <div class="bg-white dark:bg-gray-900 p-8 rounded-2xl border border-gray-200 dark:border-gray-800 card-hover relative overflow-hidden"><div class="absolute top-0 right-0 bg-blue-600/20 text-blue-400 px-4 py-1 rounded-bl-xl text-sm font-semibold">Current</div><h3 class="text-2xl font-bold text-gray-900 dark:text-white">Information Technology Analyst</h3><p class="text-blue-400 font-medium mb-4">Ministry of Management and Innovation (MGI)</p><ul class="list-none space-y-2 text-gray-600 dark:text-gray-400"><li><i class="fas fa-check text-blue-500 mr-2"></i> IT Governance: Strategic planning and institutional alignment.</li><li><i class="fas fa-check text-blue-500 mr-2"></i> Contract Management: Technical supervision, SLAs, penalties.</li><li><i class="fas fa-check text-blue-500 mr-2"></i> Digital Transformation: Modernization of government processes.</li></ul></div>
+                    <div class="bg-white dark:bg-gray-900 p-8 rounded-2xl border border-gray-200 dark:border-gray-800 card-hover"><div class="flex justify-between items-start mb-2"><h3 class="text-2xl font-bold text-gray-900 dark:text-white">IT Technician</h3><span class="text-gray-500 text-sm border border-gray-200 dark:border-gray-700 px-3 py-1 rounded-full">2018 - Present</span></div><p class="text-cyan-400 font-medium mb-4">Federal University of Goiás (UFG) | Infrastructure & Security</p><ul class="list-none space-y-2 text-gray-600 dark:text-gray-400"><li><i class="fas fa-check text-cyan-500 mr-2"></i> Linux/Windows server administration in critical environments.</li><li><i class="fas fa-check text-cyan-500 mr-2"></i> Implementation of information security policies and risk management.</li><li><i class="fas fa-check text-cyan-500 mr-2"></i> Development of internal solutions and operational automation scripts.</li></ul></div>
                 </div>
             </div>
-        </div>
-    </div>
-</section>
+        </section>
 
-<!-- EXPERIENCE -->
-<section id="experiencia" class="bg-gray-900/50 py-24 px-6 border-y border-gray-800 scroll-mt-28">
-    <div class="max-w-5xl mx-auto">
-        <h2 class="text-3xl font-bold mb-12 text-center text-white" data-aos="fade-up">Strategic Role <span class="text-blue-400">in the Public Sector</span></h2>
-        <div class="space-y-6">
-            <div class="bg-gray-900 p-8 rounded-2xl border border-gray-800 card-hover relative overflow-hidden" data-aos="fade-up">
-                <div class="absolute top-0 right-0 bg-blue-600/20 text-blue-400 px-4 py-1 rounded-bl-xl text-sm font-semibold">Present</div>
-                <h3 class="text-2xl font-bold text-white">Information Technology Analyst</h3>
-                <p class="text-blue-400 font-medium mb-4">Ministry of Management and Innovation (MGI)</p>
-                <ul class="list-none space-y-2 text-gray-400">
-                    <li class="flex items-start gap-2"><i class="fas fa-check text-blue-500 mt-1 text-sm"></i> <span>IT Governance: Strategic planning and institutional alignment.</span></li>
-                    <li class="flex items-start gap-2"><i class="fas fa-check text-blue-500 mt-1 text-sm"></i> <span>Contract Management: Technical oversight, SLAs, retentions, and sanctions.</span></li>
-                    <li class="flex items-start gap-2"><i class="fas fa-check text-blue-500 mt-1 text-sm"></i> <span>Digital Transformation: Modernization of Digital Government processes.</span></li>
-                </ul>
+        <section id="stack" class="py-24 px-6 border-b border-gray-200 dark:border-gray-800 scroll-mt-28">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl font-bold mb-12 text-gray-900 dark:text-white">Stack & <span class="text-blue-400">Skills</span></h2>
+                <div class="flex flex-wrap justify-center gap-3 mb-10"><span class="px-4 py-2 bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-full text-gray-700 dark:text-gray-300 text-sm"><i class="fas fa-chart-line mr-2 text-blue-400"></i>IT Governance</span><span class="px-4 py-2 bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-full text-gray-700 dark:text-gray-300 text-sm"><i class="fas fa-file-contract mr-2 text-blue-400"></i>Contract Management</span><span class="px-4 py-2 bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-full text-gray-700 dark:text-gray-300 text-sm"><i class="fas fa-shield-alt mr-2 text-blue-400"></i>Information Security</span><span class="px-4 py-2 bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-full text-gray-700 dark:text-gray-300 text-sm"><i class="fas fa-lightbulb mr-2 text-blue-400"></i>Digital Transformation</span></div>
+                <div class="flex flex-wrap justify-center gap-3"><span class="px-4 py-2 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-900 rounded-full text-blue-600 dark:text-blue-400 text-sm"><i class="fab fa-python mr-2"></i>Python</span><span class="px-4 py-2 bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-full text-gray-700 dark:text-gray-300 text-sm"><i class="fas fa-terminal mr-2"></i>Shell Script</span><span class="px-4 py-2 bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-900 rounded-full text-orange-600 dark:text-orange-400 text-sm"><i class="fab fa-linux mr-2"></i>Linux Server</span><span class="px-4 py-2 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-900 rounded-full text-blue-600 dark:text-blue-400 text-sm"><i class="fab fa-windows mr-2"></i>Windows Server</span><span class="px-4 py-2 bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-full text-gray-700 dark:text-gray-300 text-sm"><i class="fas fa-network-wired mr-2"></i>Networks & Infra</span><span class="px-4 py-2 bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-full text-gray-700 dark:text-gray-300 text-sm"><i class="fas fa-cogs mr-2"></i>IT Automation</span></div>
             </div>
-            <div class="bg-gray-900 p-8 rounded-2xl border border-gray-800 card-hover" data-aos="fade-up" data-aos-delay="100">
-                <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-2 gap-2">
-                    <h3 class="text-2xl font-bold text-white">Information Technology Technician</h3>
-                    <span class="text-gray-500 text-sm border border-gray-700 px-3 py-1 rounded-full whitespace-nowrap">2018 - Present</span>
-                </div>
-                <p class="text-cyan-400 font-medium mb-4">Federal University of Goiás (UFG) | Infrastructure & Security</p>
-                <ul class="list-none space-y-2 text-gray-400">
-                    <li class="flex items-start gap-2"><i class="fas fa-check text-cyan-500 mt-1 text-sm"></i> <span>Administration of Linux and Windows servers in critical environments.</span></li>
-                    <li class="flex items-start gap-2"><i class="fas fa-check text-cyan-500 mt-1 text-sm"></i> <span>Implementation of information security policies and risk management.</span></li>
-                    <li class="flex items-start gap-2"><i class="fas fa-check text-cyan-500 mt-1 text-sm"></i> <span>Creation of internal solutions and scripts for operational automation.</span></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</section>
+        </section>
 
-<!-- STACK -->
-<section id="stack" class="py-24 px-6 border-b border-gray-800 scroll-mt-28">
-    <div class="max-w-4xl mx-auto text-center">
-        <h2 class="text-3xl font-bold mb-12 text-white" data-aos="fade-up">Stack & <span class="text-blue-400">Skills</span></h2>
-        <div class="flex flex-wrap justify-center gap-3 mb-10" data-aos="fade-up" data-aos-delay="100">
-            <span class="px-4 py-2 bg-gray-800 border border-gray-700 rounded-full text-gray-300 text-sm font-medium"><i class="fas fa-chart-line mr-2 text-blue-400"></i>IT Governance</span>
-            <span class="px-4 py-2 bg-gray-800 border border-gray-700 rounded-full text-gray-300 text-sm font-medium"><i class="fas fa-file-contract mr-2 text-blue-400"></i>Contract Management</span>
-            <span class="px-4 py-2 bg-gray-800 border border-gray-700 rounded-full text-gray-300 text-sm font-medium"><i class="fas fa-shield-alt mr-2 text-blue-400"></i>Information Security</span>
-            <span class="px-4 py-2 bg-gray-800 border border-gray-700 rounded-full text-gray-300 text-sm font-medium"><i class="fas fa-lightbulb mr-2 text-blue-400"></i>Digital Transformation</span>
-        </div>
-        <div class="flex flex-wrap justify-center gap-3" data-aos="fade-up" data-aos-delay="200">
-            <span class="px-4 py-2 bg-blue-900/20 border border-blue-900 rounded-full text-blue-400 text-sm font-medium"><i class="fab fa-python mr-2"></i>Python</span>
-            <span class="px-4 py-2 bg-gray-800 border border-gray-700 rounded-full text-gray-300 text-sm font-medium"><i class="fas fa-terminal mr-2"></i>Shell Script</span>
-            <span class="px-4 py-2 bg-orange-900/20 border border-orange-900 rounded-full text-orange-400 text-sm font-medium"><i class="fab fa-linux mr-2"></i>Linux Server</span>
-            <span class="px-4 py-2 bg-blue-900/20 border border-blue-900 rounded-full text-blue-400 text-sm font-medium"><i class="fab fa-windows mr-2"></i>Windows Server</span>
-            <span class="px-4 py-2 bg-gray-800 border border-gray-700 rounded-full text-gray-300 text-sm font-medium"><i class="fas fa-network-wired mr-2"></i>Network & Infra</span>
-            <span class="px-4 py-2 bg-gray-800 border border-gray-700 rounded-full text-gray-300 text-sm font-medium"><i class="fas fa-cogs mr-2"></i>IT Automation</span>
-        </div>
-    </div>
-</section>
+        <section id="contato" class="py-24 text-center px-6 scroll-mt-28">
+            <h2 class="text-3xl font-bold mb-6 text-gray-900 dark:text-white">Let's Talk?</h2>
+            <p class="text-gray-600 dark:text-gray-400 mb-8 max-w-lg mx-auto">Open to discussions about government IT management, infrastructure, process automation, and technology.</p>
+            <a href="mailto:diego.martins@ufg.br" class="inline-flex items-center justify-center bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-8 rounded-lg transition mb-10 shadow-lg shadow-blue-500/30"><i class="fas fa-envelope mr-2"></i> diego.martins@ufg.br</a>
+            <div class="flex justify-center gap-6"><a href="https://github.com/diegogyn" target="_blank" class="w-12 h-12 bg-gray-200 dark:bg-gray-800 rounded-full flex items-center justify-center text-xl hover:bg-blue-600 hover:-translate-y-1 transition-all text-gray-700 dark:text-gray-300 hover:text-white shadow-lg"><i class="fab fa-github"></i></a><a href="https://www.linkedin.com/in/diego-martins-3761b0299/" target="_blank" class="w-12 h-12 bg-gray-200 dark:bg-gray-800 rounded-full flex items-center justify-center text-xl hover:bg-blue-600 hover:-translate-y-1 transition-all text-gray-700 dark:text-gray-300 hover:text-white shadow-lg"><i class="fab fa-linkedin-in"></i></a><a href="https://curriculo.sougov.economia.gov.br/diego-martins-1299244" target="_blank" class="w-12 h-12 bg-gray-200 dark:bg-gray-800 rounded-full flex items-center justify-center text-xl hover:bg-blue-600 hover:-translate-y-1 transition-all text-gray-700 dark:text-gray-300 hover:text-white shadow-lg"><i class="fas fa-file-signature"></i></a></div>
+        </section>
+    </main>
 
-<!-- CONTACT -->
-<section id="contato" class="py-24 text-center px-6 scroll-mt-28">
-    <h2 class="text-3xl font-bold mb-6 text-white" data-aos="fade-up">Let's Talk?</h2>
-    <p class="text-gray-400 mb-8 max-w-lg mx-auto" data-aos="fade-up" data-aos-delay="100">
-        Open to discussions about government IT management, infrastructure, process automation, and technology.
-    </p>
-    <a href="mailto:diego.martins@ufg.br" class="inline-flex items-center justify-center bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-8 rounded-lg transition mb-10 shadow-lg shadow-blue-500/30" data-aos="fade-up" data-aos-delay="200">
-        <i class="fas fa-envelope mr-2"></i> diego.martins@ufg.br
-    </a>
-    <div class="flex justify-center gap-6" data-aos="fade-up" data-aos-delay="300">
-        <a href="https://github.com/diegogyn" target="_blank" class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center text-xl hover:bg-blue-600 hover:-translate-y-1 transition-all text-gray-300 hover:text-white shadow-lg" title="GitHub">
-            <i class="fab fa-github"></i>
-        </a>
-        <a href="https://www.linkedin.com/" target="_blank" class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center text-xl hover:bg-blue-600 hover:-translate-y-1 transition-all text-gray-300 hover:text-white shadow-lg" title="LinkedIn">
-            <i class="fab fa-linkedin-in"></i>
-        </a>
-        <a href="https://www.instagram.com/" target="_blank" class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center text-xl hover:bg-blue-600 hover:-translate-y-1 transition-all text-gray-300 hover:text-white shadow-lg" title="Instagram">
-            <i class="fab fa-instagram"></i>
-        </a>
-    </div>
-</section>
+    <footer class="bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800 text-gray-500 text-center py-8 text-sm mt-auto">
+        <p>© 2026 Diego Martins</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            AOS.init({ duration: 800, once: true, offset: 50 });
+            const nav = document.getElementById('navbar');
+            const toggle = document.getElementById('nav-toggle');
+            const mobileMenu = document.getElementById('nav-mobile');
+            const iconOpen = document.getElementById('icon-open');
+            const iconClose = document.getElementById('icon-close');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+            let isOpen = false;
+            function toggleMenu() {
+                isOpen = !isOpen;
+                if (isOpen) {
+                    mobileMenu.classList.remove('hidden');
+                    iconOpen.classList.add('hidden');
+                    iconClose.classList.remove('hidden');
+                } else {
+                    mobileMenu.classList.add('hidden');
+                    iconOpen.classList.remove('hidden');
+                    iconClose.classList.add('hidden');
+                }
+            }
+            toggle.addEventListener('click', toggleMenu);
+            mobileLinks.forEach(link => link.addEventListener('click', () => { if (isOpen) toggleMenu(); }));
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 10) nav.classList.add('shadow-lg', 'shadow-blue-900/10');
+                else nav.classList.remove('shadow-lg', 'shadow-blue-900/10');
+            });
+            window.addEventListener('resize', () => { if (window.innerWidth >= 768 && isOpen) toggleMenu(); });
+
+            const themeToggles = document.querySelectorAll('.theme-toggle');
+            const htmlElement = document.documentElement;
+            function setTheme(theme) {
+                if (theme === 'dark') htmlElement.classList.add('dark');
+                else htmlElement.classList.remove('dark');
+                localStorage.setItem('theme', theme);
+                themeToggles.forEach(btn => {
+                    const sun = btn.querySelector('.sun-icon');
+                    const moon = btn.querySelector('.moon-icon');
+                    if (sun && moon) {
+                        if (theme === 'dark') { sun.classList.add('hidden'); moon.classList.remove('hidden'); }
+                        else { sun.classList.remove('hidden'); moon.classList.add('hidden'); }
+                    }
+                });
+            }
+            let currentTheme = localStorage.getItem('theme');
+            if (!currentTheme) currentTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            setTheme(currentTheme);
+            themeToggles.forEach(btn => btn.addEventListener('click', () => setTheme(htmlElement.classList.contains('dark') ? 'light' : 'dark')));
+        });
+    </script>
+</body>
+</html>
