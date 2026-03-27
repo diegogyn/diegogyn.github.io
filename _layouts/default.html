@@ -7,10 +7,13 @@
     <meta name="description" content="{{ site.description }}">
     <meta name="author" content="{{ site.author }}">
 
-    <!-- Tailwind com Typography -->
+    <!-- Tailwind (somente utilitários) -->
     <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+
+    <!-- Nosso CSS de tema (substitui o dark mode do Tailwind) -->
+    <link rel="stylesheet" href="/assets/css/theme.css">
 
     <style>
         .gradient-text {
@@ -20,60 +23,45 @@
             padding-bottom: 0.15em;
             display: inline-block;
         }
-        .card-hover { transition: all 0.3s ease; }
-        .card-hover:hover {
-            transform: translateY(-5px);
-            border-color: #3b82f6;
-            box-shadow: 0 10px 30px -10px rgba(59,130,246,0.3);
-        }
     </style>
 </head>
 
-<body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-200 font-sans leading-relaxed selection:bg-blue-500 selection:text-white flex flex-col min-h-screen">
+<body class="font-sans leading-relaxed selection:bg-blue-500 selection:text-white flex flex-col min-h-screen">
 
     <!-- NAVBAR -->
-    <nav id="navbar" class="fixed inset-x-0 top-0 w-full h-20 z-[99999] bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 transition-shadow duration-300">
+    <nav id="navbar" class="navbar fixed inset-x-0 top-0 w-full h-20 z-[99999] backdrop-blur-md border-b transition-shadow duration-300">
         <div class="w-full max-w-6xl mx-auto px-6 h-full flex justify-between items-center">
-            <!-- Logo -->
-            <a href="{{ site.url }}/" class="text-xl font-bold tracking-widest text-gray-900 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition">DM.</a>
+            <a href="{{ site.url }}/" class="text-xl font-bold tracking-widest text-gray-900 dark:text-gray-200 hover:text-blue-600 transition">DM.</a>
 
-            <!-- Menu Desktop -->
             <div class="hidden md:flex items-center gap-8 text-sm font-medium">
                 {% if page.lang == 'en' %}
-                    <a href="/en.html#sobre" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition">About</a>
-                    <a href="/en.html#experiencia" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition">Public Sector</a>
-                    <a href="/en.html#stack" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition">Stack</a>
-                    <a href="/blog.html" class="transition {% if page.url contains '/blog' or page.layout == 'post' %}text-blue-600 dark:text-blue-400{% else %}text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400{% endif %}">Blog</a>
-
-                    <!-- Theme Toggle Desktop -->
-                    <button class="theme-toggle flex items-center justify-center p-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition" aria-label="Alternar tema">
+                    <a href="/en.html#sobre" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 transition">About</a>
+                    <a href="/en.html#experiencia" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 transition">Public Sector</a>
+                    <a href="/en.html#stack" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 transition">Stack</a>
+                    <a href="/blog.html" class="transition {% if page.url contains '/blog' or page.layout == 'post' %}text-blue-600{% else %}text-gray-700 dark:text-gray-300 hover:text-blue-600{% endif %}">Blog</a>
+                    <button class="theme-toggle flex items-center justify-center p-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 transition" aria-label="Alternar tema">
                         <i class="sun-icon fas fa-sun text-xl"></i>
                         <i class="moon-icon fas fa-moon text-xl hidden"></i>
                     </button>
-
-                    <a href="/" class="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700 px-3 py-1 rounded-full text-gray-700 dark:text-gray-300 transition">
+                    <a href="/" class="flex items-center gap-2 bg-gray-100 hover:bg-gray-200 border border-gray-200 px-3 py-1 rounded-full text-gray-700 transition">
                         <img src="https://flagcdn.com/w20/br.png" alt="PT" class="w-4 h-3 rounded-sm object-cover"> PT
                     </a>
                 {% else %}
-                    <a href="/#sobre" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition">Sobre</a>
-                    <a href="/#experiencia" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition">Setor Público</a>
-                    <a href="/#stack" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition">Stack</a>
-                    <a href="/blog.html" class="transition {% if page.url contains '/blog' or page.layout == 'post' %}text-blue-600 dark:text-blue-400{% else %}text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400{% endif %}">Blog</a>
-
-                    <!-- Theme Toggle Desktop -->
-                    <button class="theme-toggle flex items-center justify-center p-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition" aria-label="Alternar tema">
+                    <a href="/#sobre" class="text-gray-700 hover:text-blue-600 transition">Sobre</a>
+                    <a href="/#experiencia" class="text-gray-700 hover:text-blue-600 transition">Setor Público</a>
+                    <a href="/#stack" class="text-gray-700 hover:text-blue-600 transition">Stack</a>
+                    <a href="/blog.html" class="transition {% if page.url contains '/blog' or page.layout == 'post' %}text-blue-600{% else %}text-gray-700 hover:text-blue-600{% endif %}">Blog</a>
+                    <button class="theme-toggle flex items-center justify-center p-2 text-gray-700 hover:text-blue-600 transition" aria-label="Alternar tema">
                         <i class="sun-icon fas fa-sun text-xl"></i>
                         <i class="moon-icon fas fa-moon text-xl hidden"></i>
                     </button>
-
-                    <a href="/en.html" class="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700 px-3 py-1 rounded-full text-gray-700 dark:text-gray-300 transition">
+                    <a href="/en.html" class="flex items-center gap-2 bg-gray-100 hover:bg-gray-200 border border-gray-200 px-3 py-1 rounded-full text-gray-700 transition">
                         <img src="https://flagcdn.com/w20/us.png" alt="EN" class="w-4 h-3 rounded-sm object-cover"> EN
                     </a>
                 {% endif %}
             </div>
 
-            <!-- Botão Hambúrguer Mobile -->
-            <button id="nav-toggle" class="md:hidden p-2 -mr-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white focus:outline-none" aria-label="Menu">
+            <button id="nav-toggle" class="md:hidden p-2 -mr-2 text-gray-700 hover:text-gray-900 focus:outline-none" aria-label="Menu">
                 <svg id="icon-open" class="w-7 h-7 block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
@@ -83,37 +71,30 @@
             </button>
         </div>
 
-        <!-- Dropdown Menu Mobile -->
-        <div id="nav-mobile" class="hidden absolute top-full left-0 w-full bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 shadow-2xl">
+        <div id="nav-mobile" class="hidden absolute top-full left-0 w-full bg-white border-b border-gray-200 shadow-2xl">
             <div class="flex flex-col gap-6 px-6 py-8 text-base font-medium">
                 {% if page.lang == 'en' %}
-                    <a href="/en.html#sobre" class="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white mobile-link">About</a>
-                    <a href="/en.html#experiencia" class="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white mobile-link">Public Sector</a>
-                    <a href="/en.html#stack" class="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white mobile-link">Stack</a>
-                    <a href="/blog.html" class="mobile-link {% if page.url contains '/blog' or page.layout == 'post' %}text-blue-600 dark:text-blue-400{% else %}text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white{% endif %}">Blog</a>
-
-                    <!-- Theme Toggle Mobile -->
-                    <button class="theme-toggle mx-auto flex items-center justify-center p-3 border border-gray-200 dark:border-gray-700 rounded-full text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition" aria-label="Alternar tema">
+                    <a href="/en.html#sobre" class="text-gray-700 hover:text-gray-900 mobile-link">About</a>
+                    <a href="/en.html#experiencia" class="text-gray-700 hover:text-gray-900 mobile-link">Public Sector</a>
+                    <a href="/en.html#stack" class="text-gray-700 hover:text-gray-900 mobile-link">Stack</a>
+                    <a href="/blog.html" class="mobile-link {% if page.url contains '/blog' or page.layout == 'post' %}text-blue-600{% else %}text-gray-700 hover:text-gray-900{% endif %}">Blog</a>
+                    <button class="theme-toggle mx-auto flex items-center justify-center p-3 border border-gray-200 rounded-full text-gray-700 hover:text-blue-600 transition" aria-label="Alternar tema">
                         <i class="sun-icon fas fa-sun text-xl"></i>
                         <i class="moon-icon fas fa-moon text-xl hidden"></i>
                     </button>
-
-                    <a href="/" class="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 w-fit px-4 py-2 rounded-full text-gray-700 dark:text-gray-300 mt-2">
+                    <a href="/" class="flex items-center gap-2 bg-gray-100 border border-gray-200 w-fit px-4 py-2 rounded-full text-gray-700 mt-2">
                         <img src="https://flagcdn.com/w20/br.png" alt="PT" class="w-4 h-3 rounded-sm object-cover"> PT
                     </a>
                 {% else %}
-                    <a href="/#sobre" class="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white mobile-link">Sobre</a>
-                    <a href="/#experiencia" class="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white mobile-link">Setor Público</a>
-                    <a href="/#stack" class="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white mobile-link">Stack</a>
-                    <a href="/blog.html" class="mobile-link {% if page.url contains '/blog' or page.layout == 'post' %}text-blue-600 dark:text-blue-400{% else %}text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white{% endif %}">Blog</a>
-
-                    <!-- Theme Toggle Mobile -->
-                    <button class="theme-toggle mx-auto flex items-center justify-center p-3 border border-gray-200 dark:border-gray-700 rounded-full text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition" aria-label="Alternar tema">
+                    <a href="/#sobre" class="text-gray-700 hover:text-gray-900 mobile-link">Sobre</a>
+                    <a href="/#experiencia" class="text-gray-700 hover:text-gray-900 mobile-link">Setor Público</a>
+                    <a href="/#stack" class="text-gray-700 hover:text-gray-900 mobile-link">Stack</a>
+                    <a href="/blog.html" class="mobile-link {% if page.url contains '/blog' or page.layout == 'post' %}text-blue-600{% else %}text-gray-700 hover:text-gray-900{% endif %}">Blog</a>
+                    <button class="theme-toggle mx-auto flex items-center justify-center p-3 border border-gray-200 rounded-full text-gray-700 hover:text-blue-600 transition" aria-label="Alternar tema">
                         <i class="sun-icon fas fa-sun text-xl"></i>
                         <i class="moon-icon fas fa-moon text-xl hidden"></i>
                     </button>
-
-                    <a href="/en.html" class="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 w-fit px-4 py-2 rounded-full text-gray-700 dark:text-gray-300 mt-2">
+                    <a href="/en.html" class="flex items-center gap-2 bg-gray-100 border border-gray-200 w-fit px-4 py-2 rounded-full text-gray-700 mt-2">
                         <img src="https://flagcdn.com/w20/us.png" alt="EN" class="w-4 h-3 rounded-sm object-cover"> EN
                     </a>
                 {% endif %}
@@ -121,12 +102,11 @@
         </div>
     </nav>
 
-    <!-- Conteúdo principal -->
     <main class="flex-grow w-full mt-20">
         {{ content }}
     </main>
 
-    <footer class="bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800 text-gray-500 text-center py-8 text-sm mt-auto">
+    <footer class="bg-white border-t border-gray-100 text-gray-500 text-center py-8 text-sm mt-auto">
         <p>© 2026 Diego Martins</p>
     </footer>
 

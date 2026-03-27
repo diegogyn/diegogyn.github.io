@@ -1,0 +1,64 @@
+/* Tema claro (padrão) */
+:root {
+  --bg-body: #f9fafb;      /* gray-50 */
+  --bg-card: #ffffff;
+  --text-primary: #111827;  /* gray-900 */
+  --text-secondary: #4b5563; /* gray-600 */
+  --border-color: #e5e7eb;  /* gray-200 */
+  --bg-nav: rgba(255,255,255,0.95);
+  --bg-footer: #ffffff;
+  --hover-bg: #f3f4f6;
+}
+
+/* Tema escuro */
+html.dark {
+  --bg-body: #111827;       /* gray-900 */
+  --bg-card: #1f2937;       /* gray-800 */
+  --text-primary: #f9fafb;  /* gray-50 */
+  --text-secondary: #9ca3af; /* gray-400 */
+  --border-color: #374151;   /* gray-700 */
+  --bg-nav: rgba(17,24,39,0.95);
+  --bg-footer: #111827;
+  --hover-bg: #374151;
+}
+
+body {
+  background-color: var(--bg-body);
+  color: var(--text-primary);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Aplicar variáveis nos componentes */
+.navbar {
+  background-color: var(--bg-nav);
+  border-bottom-color: var(--border-color);
+}
+
+.card {
+  background-color: var(--bg-card);
+  border-color: var(--border-color);
+}
+
+.card:hover {
+  border-color: #3b82f6;
+  box-shadow: 0 10px 30px -10px rgba(59,130,246,0.3);
+}
+
+.text-secondary {
+  color: var(--text-secondary);
+}
+
+.border-custom {
+  border-color: var(--border-color);
+}
+
+.bg-hover:hover {
+  background-color: var(--hover-bg);
+}
+
+/* Ajustes específicos para botões e links */
+.theme-toggle {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
