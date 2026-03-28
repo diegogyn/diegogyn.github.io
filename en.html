@@ -12,6 +12,14 @@
     <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
     <link rel="stylesheet" href="/assets/css/theme.css">
 
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
+
+
     <style>
         .gradient-text {
             background: linear-gradient(90deg, #3b82f6, #06b6d4);
@@ -29,10 +37,11 @@
         <div class="w-full max-w-6xl mx-auto px-6 h-full flex justify-between items-center">
             <a href="/en.html" class="text-xl font-bold tracking-widest text-primary hover:text-blue-600 transition">DM.</a>
             <div class="hidden md:flex items-center gap-8 text-sm font-medium">
-                <a href="/en.html#sobre" class="text-secondary hover:text-blue-600 transition">About</a>
-                <a href="/en.html#experiencia" class="text-secondary hover:text-blue-600 transition">Public Sector</a>
-                <a href="/en.html#stack" class="text-secondary hover:text-blue-600 transition">Stack</a>
-                <a href="/blog.html" class="text-secondary hover:text-blue-600 transition">Blog</a>
+            <a href="/en.html#sobre" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 transition">About</a>
+            <a href="/en.html#experiencia" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 transition">Public Sector</a>
+            <a href="/en.html#stack" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 transition">Stack</a>
+            <a href="/blog.html" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 transition">Blog</a>
+            <a href="/en.html#contato" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 transition">Contact</a>
                 <button class="theme-toggle flex items-center justify-center p-2 text-secondary hover:text-blue-600 transition" aria-label="Toggle theme">
                     <i class="sun-icon fas fa-sun text-xl"></i>
                     <i class="moon-icon fas fa-moon text-xl hidden"></i>
@@ -117,13 +126,17 @@
             <h2 class="text-3xl font-bold mb-6 text-primary">Let's Talk?</h2>
             <p class="text-secondary mb-8 max-w-lg mx-auto">Open to discussions about government IT management, infrastructure, process automation, and technology.</p>
             <a href="mailto:diego.martins@ufg.br" class="inline-flex items-center justify-center bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-8 rounded-lg transition mb-10 shadow-lg shadow-blue-500/30"><i class="fas fa-envelope mr-2"></i> diego.martins@ufg.br</a>
-            <div class="flex justify-center gap-6"><a href="https://github.com/diegogyn" target="_blank" class="w-12 h-12 bg-gray-100 hover:bg-blue-600 rounded-full flex items-center justify-center text-xl hover:-translate-y-1 transition-all text-gray-700 hover:text-white shadow-lg"><i class="fab fa-github"></i></a><a href="https://www.linkedin.com/in/diegogyn" target="_blank" class="w-12 h-12 bg-gray-100 hover:bg-blue-600 rounded-full flex items-center justify-center text-xl hover:-translate-y-1 transition-all text-gray-700 hover:text-white shadow-lg"><i class="fab fa-linkedin-in"></i></a><a href="https://curriculo.sougov.economia.gov.br/diego-martins-1299244" target="_blank" class="w-12 h-12 bg-gray-100 hover:bg-blue-600 rounded-full flex items-center justify-center text-xl hover:-translate-y-1 transition-all text-gray-700 hover:text-white shadow-lg"><i class="fas fa-file-signature"></i></a></div>
+            <div class="flex justify-center gap-6">
+                <a href="https://github.com/diegogyn" target="_blank" class="w-12 h-12 bg-gray-100 dark:bg-gray-800 hover:bg-blue-600 rounded-full flex items-center justify-center text-xl hover:-translate-y-1 transition-all text-gray-700 dark:text-gray-300 hover:text-white shadow-lg"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/diegogyn" target="_blank" class="w-12 h-12 bg-gray-100 dark:bg-gray-800 hover:bg-blue-600 rounded-full flex items-center justify-center text-xl hover:-translate-y-1 transition-all text-gray-700 dark:text-gray-300 hover:text-white shadow-lg"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://curriculo.sougov.economia.gov.br/diego-martins-1299244" target="_blank" class="w-12 h-12 bg-gray-100 dark:bg-gray-800 hover:bg-blue-600 rounded-full flex items-center justify-center text-xl hover:-translate-y-1 transition-all text-gray-700 dark:text-gray-300 hover:text-white shadow-lg"><i class="fas fa-file-signature"></i></a>
+            </div>        
         </section>
     </main>
 
-    <footer class="bg-white border-t border-gray-100 text-gray-500 text-center py-8 text-sm mt-auto">
-        <p>© 2026 Diego Martins</p>
-    </footer>
+<footer class="bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800 text-gray-500 dark:text-gray-400 text-center py-8 text-sm mt-auto">
+    <p>© 2026 Diego Martins</p>
+</footer>
 
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     <script>
